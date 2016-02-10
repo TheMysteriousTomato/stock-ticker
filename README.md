@@ -6,13 +6,7 @@ StockTicker is a game which simulates buying and selling stocks in a stock marke
   - The object of the game is for players to build as much equity (stocks and cash) as possible.
 
 ### Version
-1.0.0 - Alpha
-
-### Changelog
-1.0.1 - Added: 
-      - .htaccess
-      - Base controller
-      - Index view for Base
+1.0.1 - Alpha
 
 ### Tech
 
