@@ -1,7 +1,10 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: jondeluz
- * Date: 2016-02-10
- * Time: 3:42 PM
- */
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+<h1>Stock</h1>
+</body>
+</html>
