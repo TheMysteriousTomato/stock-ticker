@@ -25,6 +25,17 @@
 </table>
 
 
+<form method="post" accept-charset="utf-8" action="stock/search">
+    <select name="dropdown" class="form-control" onchange="this.form.submit()">
+    <?php
+
+    foreach($stocks as $row){
+        echo '<option value="'.$row->Code.'">'.$row->Code.'</option>';
+    }
+    ?>
+</select>
+</form>
+
 
 </body>
 </html>

@@ -12,4 +12,5 @@ class Stocks extends MY_Model
         return $this->all();
     }
 
+
 }
