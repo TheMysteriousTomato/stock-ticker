@@ -1,6 +1,14 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## 1.0.3 - 2016-02-10
+### Added:
+- Added stockcontroller
+- Added stock model
+- Added stock index view
+
+
+
 ## 1.0.2 - 2016-02-10
 ### Added:
 - page templates
