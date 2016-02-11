@@ -5,7 +5,7 @@ RewriteCond %{REQUEST_FILENAME} -f [OR]
 RewriteCond %{REQUEST_FILENAME} -d [OR]
 RewriteCond $1 ^(robots\.txt|favicon\.ico|style\.css)
 RewriteRule ^(.*)$ - [L]
-# use index.php as front controller ...
+# use players.php as front controller ...
 RewriteRule ^(.*)$ ./index.php/$1 [L]
 # Turn on IE8-IE9 XSS prevention tools
 Header set X-XSS-Protection "1; mode=block"
