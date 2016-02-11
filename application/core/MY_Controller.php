@@ -30,10 +30,12 @@ class Application extends CI_Controller {
      * Render this page
      */
     function render() {
-        $this->data['header'] = $this->parser->parse('templates/_header', $this->data);
-        $this->data['content'] = $this->parser->parse('templates/_content', $this->data);
-        $this->data['footer'] = $this->parser->parse('templates/_footer', $this->data);
+        $this->data['header'] = $this->parser->parse('templates/_header', $this->data, true);
+        $this->data['content'] = $this->parser->parse('templates/_content', $this->data, true);
+        $this->data['footer'] = $this->parser->parse('templates/_footer', $this->data, true);
 
+        $this->data['left-panel'] = $this->parser->parse($this->data['left-panel-content'], $this->data, true);
+        $this->data['right-panel'] = $this->parser->parse($this->data['right-panel-content'], $this->data, true);
 
         // finally, build the browser page!
         $this->data['data'] = &$this->data;

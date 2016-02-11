@@ -6,6 +6,7 @@ All notable changes to this project will be documented in this file.
 - page templates
 - updated base controller
 - initial stylesheet ( temp )
+- fixed view injection
 
 ## 1.0.1 - 2016-02-09
 ### Added:
