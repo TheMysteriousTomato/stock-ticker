@@ -31,12 +31,13 @@ class Application extends CI_Controller {
      * Render this page
      */
     function render() {
-        $this->data['menubar'] = $this->parser->parse('_menubar', $this->config->item('menu_choices'),true);
+       // $this->data['menubar'] = $this->parser->parse('_menubar', $this->config->item('menu_choices'),true);
         $this->data['content'] = $this->parser->parse($this->data['pagebody'], $this->data, true);
 
         // finally, build the browser page!
         $this->data['data'] = &$this->data;
-        $this->parser->parse('_template', $this->data);
+        $this->parser->parse('_template.php', $this->data);
+
     }
 
 }
