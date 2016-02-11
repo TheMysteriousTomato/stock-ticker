@@ -19,9 +19,21 @@ class Stock extends Application {
         $this->data['title'] = "Stocks";
         $this->data['pagebody'] = 'stock/index';
         $this->data['left-panel-content'] = 'stock/index';
-        $this->data['right-panel-content'] = 'stock/index';
+        //$this->data['right-panel-content'] = 'stock/index';
 
         $this->data['stocks'] = $this->stocks->getAllStocks();
         $this->render();
+    }
+
+    public function search(){
+        $code = $this->input->post('dropdown');
+        redirect('stock/display/' . $code);
+    }
+
+    public function display($code){
+        $data['transactions'] = $this->transactions->displayTransactions($code);
+        $data['movements'] = $this->movements->displayMovements($code);
+
+        $this->load->view('stock/display', $data);
     }
 }

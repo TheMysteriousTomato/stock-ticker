@@ -1,10 +1,14 @@
 <?php
 
-class Transactions extends MY_Model
+class Transactions extends MY_Model2
 {
     // constructor
     function __construct()
     {
-        parent::__construct('transactions');
+        parent::__construct('transactions', 'Stock', 'Player');
+    }
+
+    function displayTransactions($code){
+        return $this->group($code);
     }
 }
