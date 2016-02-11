@@ -40,8 +40,6 @@ class Application extends CI_Controller {
         $this->data['content'] = $this->parser->parse('templates/_content', $this->data, true);
         $this->data['footer']  = $this->parser->parse('templates/_footer', $this->data, true);
 
-
-
         // finally, build the browser page!
         $this->data['data'] = &$this->data;
         $this->parser->parse('templates/_master', $this->data);
