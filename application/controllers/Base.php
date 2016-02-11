@@ -27,6 +27,12 @@ class Base extends Application {
      */
     public function index()
     {
+        /* Grab data from database for Stocks and Players */
+        $this->data['stocks'] = $this->stocks->getAllStocks();
+        $this->data['players'] = $this->players->getAllPlayers();
+
+
+        /* Set up data to render page */
         $this->data['title'] = "Stock Ticker";
         $this->data['left-panel-content'] = 'base/players.php';
         $this->data['right-panel-content'] = 'base/stocks.php';
