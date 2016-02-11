@@ -8,7 +8,7 @@
 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Base extends CI_Controller {
+class Base extends Application {
 
     /**
      * Index Page for this controller.
@@ -27,6 +27,7 @@ class Base extends CI_Controller {
      */
     public function index()
     {
-        $this->load->view('base/index');
+        $this->data['title'] = "Your text here";
+        $this->render();
     }
 }

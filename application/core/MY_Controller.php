@@ -24,19 +24,20 @@ class Application extends CI_Controller {
         $this->data = array();
         $this->data['title'] = '?';
         $this->errors = array();
-        $this->data['pageTitle'] = '??';
     }
 
     /**
      * Render this page
      */
     function render() {
-        $this->data['menubar'] = $this->parser->parse('_menubar', $this->config->item('menu_choices'),true);
-        $this->data['content'] = $this->parser->parse($this->data['pagebody'], $this->data, true);
+        $this->data['header'] = $this->parser->parse('templates/_header', $this->data);
+        $this->data['content'] = $this->parser->parse('templates/_content', $this->data);
+        $this->data['footer'] = $this->parser->parse('templates/_footer', $this->data);
+
 
         // finally, build the browser page!
         $this->data['data'] = &$this->data;
-        $this->parser->parse('_template', $this->data);
+        $this->parser->parse('templates/_master', $this->data);
     }
 
 }
