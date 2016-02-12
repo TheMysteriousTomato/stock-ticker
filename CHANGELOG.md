@@ -1,12 +1,19 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## 1.0.6 - 2016-02-11
+### Added:
+- Grab equity for each appropriate player
+- Links for each player's portfolio page
+- Links for each stock's history page
+- Homepage with stocks and players info
+
 ## 1.0.4 - 2016-02-11
 ### Added:
 - Added stock/display
 - Added dropdown list in stock index
 - Altered Movements and Transactions models
-- Altered autolaod
+- Altered autoload
     - autoloaded movements and transactions models
     - url helper
 
