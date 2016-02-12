@@ -3,6 +3,10 @@ All notable changes to this project will be documented in this file.
 
 ## 1.0.7 - 2016-02-11
 ### Added:
+- Now displays currently logged in user
+
+## 1.0.7 - 2016-02-11
+### Added:
 - Added login and logoff funcitonality
 
 ## 1.0.6 - 2016-02-11
