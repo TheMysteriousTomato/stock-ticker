@@ -8,9 +8,16 @@ class Stocks extends MY_Model
         parent::__construct('stocks','Code');
     }
 
-    function getAllStocks(){
+    function getAllStocks()
+    {
         return $this->all();
     }
 
+
+    function getRecentStock()
+    {
+        $key = $this->movements->latestMovement();
+        return $this->get($key);
+    }
 
 }
