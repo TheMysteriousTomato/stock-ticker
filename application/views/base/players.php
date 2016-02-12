@@ -7,7 +7,7 @@
     </tr>
     {players}
     <tr>
-        <td>{Player}</td>
+        <td><a href={href}>{Player}</a></td>
         <td>{Cash}</td>
         <td>{Equity}</td
     </tr>

@@ -11,10 +11,14 @@ class Players extends MY_Model
     function getAllPlayers(){
         $players = $this->all();
 
-        /* Grab equity for each Player and add it to each Player */
+        /* Add additional attributes to each Player */
         foreach ($players as $player)
         {
+            // Grab each equity
             $player->Equity = $this->players->getEquity($player->Player);
+
+            // Add a link to each player's portfolio
+            $player->href = '/players/' . $player->Player;
         }
 
         return $players;
