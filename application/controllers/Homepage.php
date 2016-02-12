@@ -14,9 +14,9 @@ class Homepage extends Application {
      * Index Page for this controller.
      *
      * Maps to the following URL
-     * 		http://example.com/players.php/welcome
+     * 		http://example.com/index.php/welcome
      *	- or -
-     * 		http://example.com/players.php/welcome/index
+     * 		http://example.com/index.php/welcome/index
      *	- or -
      * Since this controller is set as the default controller in
      * config/routes.php, it's displayed at http://example.com/
@@ -31,6 +31,11 @@ class Homepage extends Application {
         $this->data['stocks'] = $this->stocks->getAllStocks();
         $this->data['players'] = $this->players->getAllPlayers();
 
+        /* Grab equity for each Player and add it to each Player */
+        foreach ($this->data['players'] as $player)
+        {
+            $player->Equity = $this->players->getEquity($player->Player);
+        }
 
         /* Set up data to render page */
         $this->data['title'] = "Stock Ticker";

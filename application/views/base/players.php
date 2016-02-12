@@ -9,7 +9,7 @@
     <tr>
         <td>{Player}</td>
         <td>{Cash}</td>
-        <td>{Equity}</td>
+        <td>{Equity}</td
     </tr>
     {/players}
 </table>
