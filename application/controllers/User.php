@@ -12,18 +12,16 @@ class User extends Application {
 
 
     public function login(){
-        $user = $data['value']= $this->input->post('username');
-
+        $user  = $this->input->post('username');
         $userdata = array('username' => $user);
-
         $this->session->set_userdata($userdata);
 
-        echo $this->session->userdata('username');
         redirect($this->agent->referrer());
     }
 
     public function logoff(){
         $this->session->unset_userdata('username');
+
         redirect($this->agent->referrer());
     }
 
