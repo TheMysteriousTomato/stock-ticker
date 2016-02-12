@@ -8,6 +8,10 @@ All notable changes to this project will be documented in this file.
 - Links for each stock's history page
 - Homepage with stocks and players info
 
+## 1.0.5 - 2016-02-11
+### Added:
+- Stock History
+
 ## 1.0.4 - 2016-02-11
 ### Added:
 - Added stock/display
@@ -17,15 +21,11 @@ All notable changes to this project will be documented in this file.
     - autoloaded movements and transactions models
     - url helper
 
-
-
 ## 1.0.3 - 2016-02-10
 ### Added:
 - Added stockcontroller
 - Added stock model
 - Added stock index view
-
-
 
 ## 1.0.2 - 2016-02-10
 ### Added:
