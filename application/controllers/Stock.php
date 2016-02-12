@@ -13,27 +13,84 @@ class Stock extends Application {
 
     public function index()
     {
-        //$data['stocks'] = $this->stocks->getAllStocks();
-        //$this->load->view('stock/index');
+        $this->load->helper('form');
 
         $this->data['title'] = "Stocks";
-        $this->data['pagebody'] = 'stock/index';
-        $this->data['left-panel-content'] = 'stock/index';
-        //$this->data['right-panel-content'] = 'stock/index';
+        $this->data['left-panel-content']  = 'stock/index';
+        $this->data['right-panel-content'] = 'templates/_footer';
 
-        $this->data['stocks'] = $this->stocks->getAllStocks();
+        $stock = $this->stocks->getRecentStock();
+
+        $form       = form_open('stock/display');
+        $stock_codes  = array();
+        $stock_names  = array();
+        $stocks     = $this->stocks->getAllStocks();
+
+        foreach( $stocks as $item )
+        {
+            array_push($stock_codes, $item->Code);
+            array_push($stock_names, $item->Name);
+        }
+
+        $stocks = array_combine($stock_codes, $stock_names);
+
+        $select                 = form_dropdown('stock',
+                                                $stocks,
+                                                $stock->Code,
+                                                "class = 'form-control'" .
+                                                "onchange = 'this.form.submit()'");
+
+        $this->data['Name']     = $stock->Name;
+        $this->data['Code']     = $stock->Code;
+        $this->data['Category'] = $stock->Category;
+        $this->data['Value']    = money_format("$%i", $stock->Value);
+
+        $this->data['form']     = $form;
+        $this->data['select']   = $select;
         $this->render();
     }
 
-    public function search(){
-        $code = $this->input->post('dropdown');
-        redirect('stock/display/' . $code);
+
+    public function display()
+    {
+        $this->load->helper('form');
+
+        $code = $this->input->post('stock');
+
+        $this->data['title'] = "Stocks ~ $code";
+        $this->data['left-panel-content'] = 'stock/index';
+        $this->data['right-panel-content'] = 'templates/_footer';
+        $this->data['stock_code'] = $code;
+
+        $form        = form_open('stock/display');
+        $stock_codes = array();
+        $stock_names = array();
+        $stocks      = $this->stocks->getAllStocks();
+        $stock       = $this->stocks->get($code);
+
+        foreach( $stocks as $item )
+        {
+            array_push($stock_codes, $item->Code);
+            array_push($stock_names, $item->Name);
+        }
+
+        $stocks = array_combine($stock_codes, $stock_names);
+
+        $select                 = form_dropdown('stock',
+                                                $stocks,
+                                                $code,
+                                                "class = 'form-control'" .
+                                                "onchange = 'this.form.submit()'");
+
+        $this->data['Name']     = $stock->Name;
+        $this->data['Code']     = $stock->Code;
+        $this->data['Category'] = $stock->Category;
+        $this->data['Value']    = money_format("$%i", $stock->Value);
+
+        $this->data['form']     = $form;
+        $this->data['select']   = $select;
+        $this->render();
     }
 
-    public function display($code){
-        $data['transactions'] = $this->transactions->displayTransactions($code);
-        $data['movements'] = $this->movements->displayMovements($code);
 
-        $this->load->view('stock/display', $data);
-    }
 }

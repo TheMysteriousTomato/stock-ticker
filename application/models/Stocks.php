@@ -8,7 +8,8 @@ class Stocks extends MY_Model
         parent::__construct('stocks','Code');
     }
 
-    function getAllStocks(){
+    function getAllStocks()
+    {
         $stocks = $this->all();
 
         /* Add additional attributes to each Stock */
@@ -19,7 +20,13 @@ class Stocks extends MY_Model
         }
 
         return $stocks;
+
     }
 
+    function getRecentStock()
+    {
+        $key = $this->movements->latestMovement();
+        return $this->get($key);
+    }
 
 }
