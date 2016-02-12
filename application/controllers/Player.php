@@ -71,13 +71,12 @@ class Player extends Application {
         $this->data['select']   = $select;
         $this->data['ptrans'] = $this->transactions->getPlayerTransactions("Donald");
         $holdingsArray = $this->transactions->getCurrentHoldings("Donald");
-        $this->data['BOND'] =  $holdingsArray[BOND];
-        $this->data['GOLD'] =  $holdingsArray[GOLD];
-        $this->data['GRAN'] =  $holdingsArray[GRAN];
-        $this->data['IND'] =  $holdingsArray[IND];
-        $this->data['OIL'] =  $holdingsArray[OIL];
-        $this->data['TECH'] =  $holdingsArray[TECH];
-
+        $this->data['BOND'] =  $holdingsArray["BOND"];
+        $this->data['GOLD'] =  $holdingsArray["GOLD"];
+        $this->data['GRAN'] =  $holdingsArray["GRAN"];
+        $this->data['IND'] =  $holdingsArray["IND"];
+        $this->data['OIL'] =  $holdingsArray["OIL"];
+        $this->data['TECH'] =  $holdingsArray["TECH"];
 
 
 

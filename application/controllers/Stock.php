@@ -34,6 +34,7 @@ class Stock extends Application {
 
         $stocks = array_combine($stock_codes, $stock_names);
 
+
         $select                 = form_dropdown('stock',
                                                 $stocks,
                                                 $stock->Code,

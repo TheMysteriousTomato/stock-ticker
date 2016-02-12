@@ -31,7 +31,8 @@
                     </li>
                 </ul>
 
-                {login_control}
+
+
 
                 <ul class="nav navbar-nav navbar-left">
                     <li><a href="#">Link</a></li>
