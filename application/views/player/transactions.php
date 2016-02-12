@@ -21,3 +21,7 @@
     </tr>
     </tbody>
 </table>
+
+<div id="holdings-chart"></div>
+
+<script src="../assets/js/holdings.js"></script>
