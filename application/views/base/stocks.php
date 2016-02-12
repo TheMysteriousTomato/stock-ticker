@@ -8,7 +8,7 @@
     </tr>
     {stocks}
     <tr>
-        <td>{Code}</td>
+        <td><a href={href}>{Code}</a></td>
         <td>{Name}</td>
         <td>{Category}</td>
         <td>{Value}</td>

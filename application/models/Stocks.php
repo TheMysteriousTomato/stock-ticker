@@ -9,7 +9,16 @@ class Stocks extends MY_Model
     }
 
     function getAllStocks(){
-        return $this->all();
+        $stocks = $this->all();
+
+        /* Add additional attributes to each Stock */
+        foreach ($stocks as $stock)
+        {
+            // Add a link to each stock's history page
+            $stock->href = '/stock/' . $stock->Code;
+        }
+
+        return $stocks;
     }
 
 
