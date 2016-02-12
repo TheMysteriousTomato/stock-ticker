@@ -31,12 +31,13 @@ class Application extends CI_Controller {
      */
     function render() {
 
-
         if(empty($this->session->userdata('username'))) {
             $this->data['login_control'] = $this->parser->parse('templates/_login_control', $this->data, true);
-        } else
-            $this->data['login_control'] = $this->parser->parse('templates/_logout_control', $this->data, true);
+        } else {
+            $data = array('username' => $this->session->userdata('username'));
+            $this->data['login_control'] = $this->parser->parse('templates/_logout_control', $data, true);
 
+        }
         $this->data['header'] = $this->parser->parse('templates/_header', $this->data, true);
 
 
