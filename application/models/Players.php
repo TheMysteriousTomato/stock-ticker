@@ -9,7 +9,15 @@ class Players extends MY_Model
     }
 
     function getAllPlayers(){
-        return $this->all();
+        $players = $this->all();
+
+        /* Grab equity for each Player and add it to each Player */
+        foreach ($players as $player)
+        {
+            $player->Equity = $this->players->getEquity($player->Player);
+        }
+
+        return $players;
     }
 
     public function getEquity($player)

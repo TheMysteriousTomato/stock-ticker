@@ -31,12 +31,6 @@ class Homepage extends Application {
         $this->data['stocks'] = $this->stocks->getAllStocks();
         $this->data['players'] = $this->players->getAllPlayers();
 
-        /* Grab equity for each Player and add it to each Player */
-        foreach ($this->data['players'] as $player)
-        {
-            $player->Equity = $this->players->getEquity($player->Player);
-        }
-
         /* Set up data to render page */
         $this->data['title'] = "Stock Ticker";
         $this->data['left-panel-content'] = 'base/players.php';
