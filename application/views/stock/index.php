@@ -1,5 +1,7 @@
 <h1 class="text-center">
+    {info}
     {Name} ({Code}): &nbsp; {Value}, {Category}
+    {/info}
 </h1>
 
 {form}
