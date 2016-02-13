@@ -34,6 +34,7 @@ class Stock extends Application {
 
         $stocks = array_combine($stock_codes, $stock_names);
 
+
         $select                 = form_dropdown('stock',
                                                 $stocks,
                                                 $stock->Code,
@@ -47,6 +48,9 @@ class Stock extends Application {
 
         $this->data['form']     = $form;
         $this->data['select']   = $select;
+
+        //hokey
+        $this->data['src'] = "../assets/js/stock-history.js";
         $this->render();
     }
 
@@ -55,7 +59,15 @@ class Stock extends Application {
     {
         $this->load->helper('form');
 
-        $code = $this->input->post('stock');
+        if(!(empty($this->input->post('stock'))))
+        {
+            $code = $this->input->post('stock');
+            $this->data['src'] = "../assets/js/stock-history.js";
+        }
+        else {
+            $code = $this->uri->segment(3);
+            $this->data['src'] = "../../assets/js/stock-history.js";
+        }
 
         $this->data['title'] = "Stocks ~ $code";
         $this->data['left-panel-content'] = 'stock/index';
