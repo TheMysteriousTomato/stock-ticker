@@ -11,4 +11,4 @@
 <div id="stock_code" class="hidden-xs hidden-sm hidden-md hidden-lg">{url}</div>
 
 <div id="temp-stocks"></div>
-<script src={src}></script>
+<script src="/assets/js/stock-history.js"></script>

@@ -4,4 +4,4 @@
 
 <div id="holdings-chart"></div>
 
-<script src="../assets/js/holding-history.js"></script>
+<script src="/assets/js/holding-history.js"></script>
