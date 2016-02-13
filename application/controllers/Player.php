@@ -121,4 +121,26 @@ class Player extends Application {
 
         $this->render();
     }
+
+    public function getTransactions() {
+        $transactions = $this->transactions->getCurrentHoldings("George");
+        $keys = array_keys($transactions[0]);
+        $values = array_values($transactions[0]);
+
+        $dataPoints = array();
+        foreach($values as $value)
+        {
+            $arr = array();
+            array_push($arr, $value);
+            array_push($dataPoints, $arr);
+        }
+
+        $result = array();
+
+        array_push($result, $keys);
+        array_push($result, $dataPoints);
+
+        $this->output->set_header('Content-Type: application/json; charset=utf-8');
+        echo json_encode($result);
+    }
 }
