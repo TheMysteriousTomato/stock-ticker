@@ -35,6 +35,7 @@ class Homepage extends Application {
         $this->data['title'] = "Stock Ticker";
         $this->data['left-panel-content'] = 'base/players.php';
         $this->data['right-panel-content'] = 'base/stocks.php';
+
         $this->render();
     }
 }
