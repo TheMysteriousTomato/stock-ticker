@@ -1,5 +1,8 @@
 # Changelog
 All notable changes to this project will be documented in this file.
+## 1.1.0 Beta - 2016-02-11
+### Added:
+- Moved transaction table to right-panel
 
 ## 1.0.11 - 2016-02-11
 ### Added:
