@@ -1,5 +1,10 @@
 # Changelog
 All notable changes to this project will be documented in this file.
+
+## 1.1.3 Beta - 2016-02-13
+### Removed:
+- Content Delivery Networks ( files served locally )
+
 ## 1.1.2 Beta - 2016-02-13
 ### Removed:
 - All Transactions Model calls in the Player Controller
