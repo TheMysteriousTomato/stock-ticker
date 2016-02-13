@@ -1,5 +1,5 @@
 
-<h2 class="text-center underline">Players</h2>
+<h2 class="text-center underline">{Playername}</h2>
 {form}
 {select}
 
@@ -27,3 +27,7 @@
     {/ptrans}
     </tbody>
 </table>
+
+<div id="holdings-chart"></div>
+
+<script src="../assets/js/holdings.js"></script>

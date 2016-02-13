@@ -1,4 +1,4 @@
-<h2 class="text-center underline">Holdings</h2>
+<h2 class="text-center underline">Transactions</h2>
 <table class="table table-striped">
     <thead>
     <tr>
@@ -11,6 +11,7 @@
     </tr>
     </thead>
     <tbody>
+    {holdings}
     <tr>
         <td>{BOND}</td>
         <td>{GOLD}</td>
@@ -19,9 +20,7 @@
         <td>{OIL}</td>
         <td>{TECH}</td>
     </tr>
+    {/holdings}
     </tbody>
 </table>
 
-<div id="holdings-chart"></div>
-
-<script src="../assets/js/holdings.js"></script>

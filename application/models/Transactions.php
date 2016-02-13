@@ -12,6 +12,19 @@ class Transactions extends MY_Model2
         return $this->group($code);
     }
 
+
+    function latestTransaction()
+    {
+        $this->db->select('Player');
+        $this->db->from('transactions');
+        $this->db->order_by('Datetime', 'desc');
+        $this->db->limit(1);
+        $query = $this->db->get();
+
+        $result = $query->result_array();
+        return $result[0]["Player"];
+    }
+
     function getAllTransactions()
     {
         $transactions = $this->all();
@@ -35,11 +48,11 @@ class Transactions extends MY_Model2
         $query = $this->db->get();
         $noData = array();
         $noPlayer = [
-            "DateTime" => "No Data",
-            "Player" => "No Data",
-            "Stock" => "No Data",
-            "Trans" => "No Data",
-            "Quantity" => "No Data",
+            "DateTime" => "N/A",
+            "Player"   => "N/A",
+            "Stock"    => "N/A",
+            "Trans"    => "N/A",
+            "Quantity" => "N/A",
         ];
         array_push($noData, $noPlayer);
 
@@ -62,9 +75,9 @@ class Transactions extends MY_Model2
 
         $item = [
             "DateTime" => "N/A",
-            "Player" => "N/A",
-            "Stock" => "N/A",
-            "Trans" => "N/A",
+            "Player"   => "N/A",
+            "Stock"    => "N/A",
+            "Trans"    => "N/A",
             "Quantity" => "N/A"
         ];
 
@@ -101,13 +114,10 @@ class Transactions extends MY_Model2
         $resultTech = 0;
         $resultArray = Array();
 
-
-
         if($resultset != null)
         {
             foreach($resultset as $key => &$value)
             {
-
                 if($value['Stock'] == "BOND") {
                     if ($value['Trans'] == 'buy')
                         $resultBond += $value['Quantity'];
@@ -152,8 +162,11 @@ class Transactions extends MY_Model2
             "TECH" => $resultTech
         ];
 
+        $lol = array();
+        array_push($lol, $resultArray);
 
-        return $resultArray;
+
+        return $lol;
     }
 
 }
