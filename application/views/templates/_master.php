@@ -14,7 +14,7 @@ if ( !defined( 'APPPATH' ) )
 
     <!-- Custom Stylesheet -->
     <link rel="stylesheet" href="/assets/css/temp.css">
-    
+
     <!-- jQuery -->
     <script src="/assets/js/jQuery.min.js"></script>
 
@@ -23,7 +23,7 @@ if ( !defined( 'APPPATH' ) )
 
     <!-- Module Export -->
     <script src="/assets/js/module-exporting.js"></script>
-    </head>
+</head>
 <body>
     {header}
     {content}
