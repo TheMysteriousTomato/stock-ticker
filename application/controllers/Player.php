@@ -11,12 +11,12 @@ class Player extends Application {
     {
         /* Grabbing username if logged in */
         if(empty($this->session->userdata('username'))) {
-            $latestPlayer = $this->transactions->latestTransaction();
+            $latestPlayer = $this->players->latestTransaction();
         } else
             $latestPlayer = $this->session->userdata('username');
 
         /* Grab data from database for Transactions and Players */
-        $this->data['transactions'] = $this->transactions->getAllTransactions();
+        $this->data['transactions'] = $this->players->getAllTransactions();
         $this->data['players']      = $this->players->getAllPlayers();
 
         /* Set up data to render page */
@@ -24,8 +24,8 @@ class Player extends Application {
         $this->data['left-panel-content']  = 'player/players';
         $this->data['right-panel-content'] = 'player/transactions';
         $this->data['Playername'] = $latestPlayer;
-        $this->data['ptrans']     = $this->transactions->getPlayerTransactions($latestPlayer);
-        $this->data['holdings']   = $this->transactions->getCurrentHoldings($latestPlayer);
+        $this->data['ptrans']     = $this->players->getPlayerTransactions($latestPlayer);
+        $this->data['holdings']   = $this->players->getCurrentHoldings($latestPlayer);
         $this->data['form']       = form_open('player/display');
         $this->data['select']     = form_dropdown('player',
                                                   $this->players->getPlayersForSelect(),
@@ -47,9 +47,9 @@ class Player extends Application {
         $this->data['right-panel-content'] = 'player/transactions';
         $this->data['Playername']          = $name;
         $this->data['player_code']         = $name;
-        $this->data['ptrans']              = $this->transactions->getPlayerTransactions($name);
-        $this->data['holdings']            = $this->transactions->getCurrentHoldings($name);
-        $this->data['transactions']        = $this->transactions->getAllTransactions();
+        $this->data['ptrans']              = $this->players->getPlayerTransactions($name);
+        $this->data['holdings']            = $this->players->getCurrentHoldings($name);
+        $this->data['transactions']        = $this->players->getAllTransactions();
         $this->data['players']             = $this->players->getAllPlayers();
         $this->data['form']                = form_open('player/display');
         $this->data['select']              = form_dropdown('player',

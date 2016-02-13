@@ -1,5 +1,9 @@
 # Changelog
 All notable changes to this project will be documented in this file.
+## 1.1.2 Beta - 2016-02-13
+### Removed:
+- All Transactions Model calls in the Player Controller
+
 ## 1.1.1 Beta - 2016-02-13
 ### Cleaned:
 - Stock Controller
