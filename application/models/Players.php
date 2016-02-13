@@ -63,4 +63,54 @@ class Players extends MY_Model
         }
         return $result;
     }
+
+    /**
+     * Generate the required array to create the dropdown select for Players.
+     *
+     * @return array
+     */
+    public function getPlayersForSelect()
+    {
+        $players = $this->getAllPlayers();
+        $player_cash  = array();
+        $player_names  = array();
+
+        foreach( $players as $item )
+        {
+            array_push($player_names, $item->Player);
+            array_push($player_cash, $item->Cash);
+
+        }
+        $players = array_combine($player_names, $player_names);
+
+        return $players;
+    }
+
+    /**
+     * Grabs the current holdings and creates a new friendly array for JSON object.
+     *
+     * @param $name
+     * @return array
+     */
+    public function getTransactionsArray($name)
+    {
+        $transactions = $this->transactions->getCurrentHoldings($name);
+        $keys = array_keys($transactions[0]);
+        $values = array_values($transactions[0]);
+
+        $dataPoints = array();
+        foreach($values as $value)
+        {
+            $arr = array();
+            array_push($arr, $value);
+            array_push($dataPoints, $arr);
+        }
+
+        $result = array();
+
+        array_push($result, $keys);
+        array_push($result, $dataPoints);
+
+        return $result;
+    }
 }

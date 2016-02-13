@@ -9,48 +9,29 @@ class Player extends Application {
      */
     public function index()
     {
-        /* Grab data from database for Transactions and Players */
-        $this->data['transactions'] = $this->transactions->getAllTransactions();
-
-        $this->data['players'] = $this->players->getAllPlayers();
-        $this->load->helper('form');
-
-        /* Set up data to render page */
-        $this->data['title'] = "Stock Ticker";
-        $this->data['left-panel-content'] = 'player/players';
-        $this->data['right-panel-content'] = 'player/transactions';
-
         /* Grabbing username if logged in */
         if(empty($this->session->userdata('username'))) {
             $latestPlayer = $this->transactions->latestTransaction();
         } else
             $latestPlayer = $this->session->userdata('username');
 
+        /* Grab data from database for Transactions and Players */
+        $this->data['transactions'] = $this->transactions->getAllTransactions();
+        $this->data['players']      = $this->players->getAllPlayers();
+
+        /* Set up data to render page */
+        $this->data['title'] = "Players ~ $latestPlayer";
+        $this->data['left-panel-content']  = 'player/players';
+        $this->data['right-panel-content'] = 'player/transactions';
         $this->data['Playername'] = $latestPlayer;
-
-        $form       = form_open('player/display');
-        $player_cash  = array();
-        $player_names  = array();
-        $players     = $this->players->getAllPlayers();
-
-        foreach( $players as $item )
-        {
-            array_push($player_names, $item->Player);
-            array_push($player_cash, $item->Cash);
-
-        }
-        $players = array_combine($player_names, $player_names);
-
-        $select                 = form_dropdown('player',
-            $players, $latestPlayer,
-            "class = 'form-control'" .
-            "onchange = 'this.form.submit()'");
-
-        $this->data['form']     = $form;
-        $this->data['select']   = $select;
-        $this->data['ptrans'] = $this->transactions->getPlayerTransactions($latestPlayer);
-        $this->data['holdings'] = $this->transactions->getCurrentHoldings($latestPlayer);
-
+        $this->data['ptrans']     = $this->transactions->getPlayerTransactions($latestPlayer);
+        $this->data['holdings']   = $this->transactions->getCurrentHoldings($latestPlayer);
+        $this->data['form']       = form_open('player/display');
+        $this->data['select']     = form_dropdown('player',
+                                                  $this->players->getPlayersForSelect(),
+                                                  $latestPlayer,
+                                                  "class = 'form-control'" .
+                                                  "onchange = 'this.form.submit()'");
         $this->render();
     }
 
@@ -59,42 +40,23 @@ class Player extends Application {
      */
     public function display()
     {
-        $this->data['transactions'] = $this->transactions->getAllTransactions();
-        $this->data['players'] = $this->players->getAllPlayers();
-        $this->load->helper('form');
-        $code = $this->input->post('player');
-        $this->data['Playername'] = $code;
+        $name = $this->input->post('player');
 
-        $this->data['title'] = "Stock Ticker";
-        $this->data['left-panel-content'] = 'player/players';
+        $this->data['title']               = "Player ~ $name";
+        $this->data['left-panel-content']  = 'player/players';
         $this->data['right-panel-content'] = 'player/transactions';
-        $this->data['player_code'] = $code;
-
-        $form       = form_open('player/display');
-        $player_cash  = array();
-        $player_names  = array();
-        $players     = $this->players->getAllPlayers();
-
-        foreach( $players as $item )
-        {
-            array_push($player_names, $item->Player);
-            array_push($player_cash, $item->Cash);
-
-        }
-
-        $players = array_combine($player_names, $player_names);
-
-        $select                 = form_dropdown('player',
-            $players,
-            $code,
-            "class = 'form-control'" .
-            "onchange = 'this.form.submit()'");
-
-        $this->data['form']     = $form;
-        $this->data['select']   = $select;
-        $this->data['ptrans'] = $this->transactions->getPlayerTransactions($code);
-        $this->data['holdings'] = $this->transactions->getCurrentHoldings($code);
-
+        $this->data['Playername']          = $name;
+        $this->data['player_code']         = $name;
+        $this->data['ptrans']              = $this->transactions->getPlayerTransactions($name);
+        $this->data['holdings']            = $this->transactions->getCurrentHoldings($name);
+        $this->data['transactions']        = $this->transactions->getAllTransactions();
+        $this->data['players']             = $this->players->getAllPlayers();
+        $this->data['form']                = form_open('player/display');
+        $this->data['select']              = form_dropdown('player',
+                                                           $this->players->getPlayersForSelect(),
+                                                           $name,
+                                                           "class = 'form-control'" .
+                                                           "onchange = 'this.form.submit()'");
         $this->render();
     }
 
@@ -103,24 +65,8 @@ class Player extends Application {
      * @param $name
      */
     public function getTransactions($name) {
-        $transactions = $this->transactions->getCurrentHoldings($name);
-        $keys = array_keys($transactions[0]);
-        $values = array_values($transactions[0]);
-
-        $dataPoints = array();
-        foreach($values as $value)
-        {
-            $arr = array();
-            array_push($arr, $value);
-            array_push($dataPoints, $arr);
-        }
-
-        $result = array();
-
-        array_push($result, $keys);
-        array_push($result, $dataPoints);
-
+        $transactions = $this->players->getTransactionsArray($name);
         $this->output->set_header('Content-Type: application/json; charset=utf-8');
-        echo json_encode($result);
+        echo json_encode($transactions);
     }
 }
