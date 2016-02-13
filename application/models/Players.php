@@ -86,6 +86,12 @@ class Players extends MY_Model
         return $players;
     }
 
+    /**
+     * Grabs the current holdings and creates a new friendly array for JSON object.
+     *
+     * @param $name
+     * @return array
+     */
     public function getTransactionsArray($name)
     {
         $transactions = $this->transactions->getCurrentHoldings($name);
