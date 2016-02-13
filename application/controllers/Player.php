@@ -9,34 +9,29 @@ class Player extends Application {
      */
     public function index()
     {
-        $this->load->helper('form');
-        /* Grab data from database for Transactions and Players */
-        $this->data['transactions'] = $this->transactions->getAllTransactions();
-        $this->data['players'] = $this->players->getAllPlayers();
-
-        /* Set up data to render page */
-        $this->data['title'] = "Stock Ticker";
-        $this->data['left-panel-content'] = 'player/players';
-        $this->data['right-panel-content'] = 'player/transactions';
-
         /* Grabbing username if logged in */
         if(empty($this->session->userdata('username'))) {
             $latestPlayer = $this->transactions->latestTransaction();
         } else
             $latestPlayer = $this->session->userdata('username');
 
+        /* Grab data from database for Transactions and Players */
+        $this->data['transactions'] = $this->transactions->getAllTransactions();
+        $this->data['players']      = $this->players->getAllPlayers();
+
+        /* Set up data to render page */
+        $this->data['title'] = "Players ~ $latestPlayer";
+        $this->data['left-panel-content']  = 'player/players';
+        $this->data['right-panel-content'] = 'player/transactions';
         $this->data['Playername'] = $latestPlayer;
-
-        $players_select         = $this->players->getPlayersForSelect();
-        $select                 = form_dropdown('player',
-                                                $players_select, $latestPlayer,
-                                                "class = 'form-control'" .
-                                                "onchange = 'this.form.submit()'");
-        $this->data['form']     = form_open('player/display');
-        $this->data['select']   = $select;
-        $this->data['ptrans']   = $this->transactions->getPlayerTransactions($latestPlayer);
-        $this->data['holdings'] = $this->transactions->getCurrentHoldings($latestPlayer);
-
+        $this->data['ptrans']     = $this->transactions->getPlayerTransactions($latestPlayer);
+        $this->data['holdings']   = $this->transactions->getCurrentHoldings($latestPlayer);
+        $this->data['form']       = form_open('player/display');
+        $this->data['select']     = form_dropdown('player',
+                                                  $this->players->getPlayersForSelect(),
+                                                  $latestPlayer,
+                                                  "class = 'form-control'" .
+                                                  "onchange = 'this.form.submit()'");
         $this->render();
     }
 
@@ -45,28 +40,23 @@ class Player extends Application {
      */
     public function display()
     {
-        $this->load->helper('form');
-        $this->data['transactions'] = $this->transactions->getAllTransactions();
-        $this->data['players'] = $this->players->getAllPlayers();
-        $code = $this->input->post('player');
-        $this->data['Playername'] = $code;
-        $this->data['title'] = "Stock Ticker";
-        $this->data['left-panel-content'] = 'player/players';
+        $name = $this->input->post('player');
+
+        $this->data['title']               = "Player ~ $name";
+        $this->data['left-panel-content']  = 'player/players';
         $this->data['right-panel-content'] = 'player/transactions';
-        $this->data['player_code'] = $code;
-
-        $players_select      = $this->players->getPlayersForSelect();
-
-        $select              = form_dropdown('player',
-                                             $players_select,
-                                             $code,
-                                             "class = 'form-control'" .
-                                             "onchange = 'this.form.submit()'");
-        $this->data['form']     = form_open('player/display');
-        $this->data['select']   = $select;
-        $this->data['ptrans']   = $this->transactions->getPlayerTransactions($code);
-        $this->data['holdings'] = $this->transactions->getCurrentHoldings($code);
-
+        $this->data['Playername']          = $name;
+        $this->data['player_code']         = $name;
+        $this->data['ptrans']              = $this->transactions->getPlayerTransactions($name);
+        $this->data['holdings']            = $this->transactions->getCurrentHoldings($name);
+        $this->data['transactions']        = $this->transactions->getAllTransactions();
+        $this->data['players']             = $this->players->getAllPlayers();
+        $this->data['form']                = form_open('player/display');
+        $this->data['select']              = form_dropdown('player',
+                                                           $this->players->getPlayersForSelect(),
+                                                           $name,
+                                                           "class = 'form-control'" .
+                                                           "onchange = 'this.form.submit()'");
         $this->render();
     }
 
