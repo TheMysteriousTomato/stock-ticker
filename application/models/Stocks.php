@@ -28,5 +28,4 @@ class Stocks extends MY_Model
         $key = $this->movements->latestMovement();
         return $this->get($key);
     }
-
 }
