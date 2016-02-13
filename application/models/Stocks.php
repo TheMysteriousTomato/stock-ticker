@@ -16,7 +16,7 @@ class Stocks extends MY_Model
         foreach ($stocks as $stock)
         {
             // Add a link to each stock's history page
-            $stock->href = '/stock/' . $stock->Code;
+            $stock->href = '/stock/display/' . $stock->Code;
         }
 
         return $stocks;

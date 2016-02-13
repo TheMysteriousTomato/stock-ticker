@@ -1,4 +1,4 @@
-<form class='navbar-form navbar-right' action='user/login' method='post'>
+<form class='navbar-form navbar-right' action='/user/login' method='post'>
     <div class='form-group'>
         <input name='username' type='text' class='form-control' placeholder='Username'>
     </div>

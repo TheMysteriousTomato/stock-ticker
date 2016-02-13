@@ -16,13 +16,13 @@ class User extends Application {
         $userdata = array('username' => $user);
         $this->session->set_userdata($userdata);
 
-        redirect($this->agent->referrer());
+        redirect(base_url());
     }
 
     public function logoff(){
         $this->session->unset_userdata('username');
 
-        redirect($this->agent->referrer());
+        redirect(base_url());
     }
 
 }

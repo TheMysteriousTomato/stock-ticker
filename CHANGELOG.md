@@ -1,13 +1,19 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## 1.0.10 - 2016-02-11
+### Added:
+- Homepage: fix links to stock history pages
+- Change navbar with appropriate names
+- Fix login and logoff redirect
+
 ## 1.0.9 - 2016-02-11
 ### Added:
 - Now displays currently logged in user
 
 ## 1.0.8 - 2016-02-11
 ### Added:
-- Added login and logoff funcitonality
+- Added login and logoff functionality
 
 ## 1.0.7 - 2016-02-12
 ### Added:
