@@ -5,6 +5,8 @@ All notable changes to this project will be documented in this file.
 ### Added:
 - Load most active player if no player is logged in
 - Reduced code in Player Controller and Transaction Model
+### Fixed:
+- Fix Players/index - no playername
 
 ## 1.0.10 - 2016-02-11
 ### Added:
