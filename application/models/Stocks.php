@@ -2,12 +2,16 @@
 
 class Stocks extends MY_Model
 {
-    // constructor
     function __construct()
     {
         parent::__construct('stocks','Code');
     }
 
+    /**
+     * Grabs all of the Stocks.
+     *
+     * @return array
+     */
     function getAllStocks()
     {
         $stocks = $this->all();
@@ -20,9 +24,13 @@ class Stocks extends MY_Model
         }
 
         return $stocks;
-
     }
 
+    /**
+     * Grabs the most recent Stock.
+     *
+     * @return null|object
+     */
     function getRecentStock()
     {
         $key = $this->movements->latestMovement();

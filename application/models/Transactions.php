@@ -2,17 +2,26 @@
 
 class Transactions extends MY_Model2
 {
-    // constructor
     function __construct()
     {
         parent::__construct('transactions', 'Stock', 'Player');
     }
 
+    /**
+     * Displays the transactions grouped by the given Stock.
+     *
+     * @param $code
+     * @return mixed
+     */
     function displayTransactions($code){
         return $this->group($code);
     }
 
-
+    /**
+     * Grabs the latest Transaction.
+     *
+     * @return mixed
+     */
     function latestTransaction()
     {
         $this->db->select('Player');
@@ -25,6 +34,11 @@ class Transactions extends MY_Model2
         return $result[0]["Player"];
     }
 
+    /**
+     * Get all the Transactions.
+     *
+     * @return array
+     */
     function getAllTransactions()
     {
         $transactions = $this->all();
@@ -37,9 +51,14 @@ class Transactions extends MY_Model2
         }
 
         return $transactions;
-
     }
 
+    /**
+     * Grabs the Transactions of the given Player.
+     *
+     * @param $player
+     * @return array
+     */
     public function getPlayerTransactions($player){
 
         $this->db->select('*');
@@ -66,6 +85,12 @@ class Transactions extends MY_Model2
         return $resultset;
     }
 
+    /**
+     * Joins the Transactions and Stocks together and returns the result set.
+     *
+     * @param $stock
+     * @return array
+     */
     public function getSalesTransactions($stock){
 
         $this->db->select('*');
@@ -93,6 +118,12 @@ class Transactions extends MY_Model2
         return $resultset;
     }
 
+    /**
+     * Calculates the current holdings of the given Player.
+     *
+     * @param $player
+     * @return array
+     */
     public function getCurrentHoldings($player){
         $resultset = null;
 
@@ -164,7 +195,6 @@ class Transactions extends MY_Model2
 
         $holdings = array();
         array_push($holdings, $resultArray);
-
 
         return $holdings;
     }
