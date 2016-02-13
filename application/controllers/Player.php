@@ -42,8 +42,8 @@ class Player extends Application {
             $latestPlayer = $this->transactions->latestTransaction();
         } else
             $latestPlayer = $this->session->userdata('username');
-        $this->data['Player'] = $latestPlayer;
 
+        $this->data['Playername'] = $latestPlayer;
 
         $form       = form_open('player/display');
         $player_cash  = array();
@@ -66,14 +66,17 @@ class Player extends Application {
 
         $this->data['form']     = $form;
         $this->data['select']   = $select;
-        $this->data['ptrans'] = $this->transactions->getPlayerTransactions($this->session->userdata('username'));
+        $this->data['ptrans'] = $this->transactions->getPlayerTransactions($latestPlayer);
         $holdingsArray = $this->transactions->getCurrentHoldings($this->session->userdata('username'));
-        $this->data['BOND'] =  $holdingsArray["BOND"];
-        $this->data['GOLD'] =  $holdingsArray["GOLD"];
-        $this->data['GRAN'] =  $holdingsArray["GRAN"];
-        $this->data['IND'] =  $holdingsArray["IND"];
-        $this->data['OIL'] =  $holdingsArray["OIL"];
-        $this->data['TECH'] =  $holdingsArray["TECH"];
+
+        $this->data['holdings'] = $this->transactions->getCurrentHoldings($latestPlayer);
+
+//        $this->data['BOND'] =  $holdingsArray["BOND"];
+//        $this->data['GOLD'] =  $holdingsArray["GOLD"];
+//        $this->data['GRAN'] =  $holdingsArray["GRAN"];
+//        $this->data['IND'] =  $holdingsArray["IND"];
+//        $this->data['OIL'] =  $holdingsArray["OIL"];
+//        $this->data['TECH'] =  $holdingsArray["TECH"];
 
 
 
