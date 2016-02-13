@@ -17,7 +17,7 @@ if ( !defined( 'APPPATH' ) )
 
 
     <!-- jQuery -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script src="/assets/js/jQuery.min.js"></script>
 
 
 
@@ -29,11 +29,8 @@ if ( !defined( 'APPPATH' ) )
     {content}
     {footer}
 
-
-
-
     <!-- Latest compiled and minified JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+    <script src="/assets/js/bootstrap.min.js"></script>
 
 </body>
 </html>
