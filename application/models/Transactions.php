@@ -126,77 +126,36 @@ class Transactions extends MY_Model2
      */
     public function getCurrentHoldings($player){
         $resultset = null;
-
-        $this->db->select('*');
+        $results   = array();
+        $stocks = $this->stocks->all();
+        $this->db->select('Quantity, Trans, Stock, Value');
         $this->db->from('transactions t');
         $this->db->join('stocks s', 's.Code=t.Stock', 'left');
         $this->db->join('players p', 'p.Player=t.Player', 'left');
         $this->db->where('t.Player', $player);
         $query = $this->db->get();
+
         if($query->num_rows() != 0)
         {
             $resultset = $query->result_array();
         }
-        $resultBond = 0;
-        $resultGold = 0;
-        $resultGrain = 0;
-        $resultInd = 0;
-        $resultOil = 0;
-        $resultTech = 0;
-        $resultArray = Array();
 
-        if($resultset != null)
+        foreach( $stocks as $item )
         {
-            foreach($resultset as $key => &$value)
-            {
-                if($value['Stock'] == "BOND") {
-                    if ($value['Trans'] == 'buy')
-                        $resultBond += $value['Quantity'];
-                    elseif ($value['Trans'] == 'sell')
-                        $resultBond -= $value['Quantity'];
-                } else if($value['Stock'] == "GOLD") {
-                    if ($value['Trans'] == 'buy')
-                        $resultGold += $value['Quantity'];
-                    elseif ($value['Trans'] == 'sell')
-                        $resultGold -= $value['Quantity'];
-                } else if($value['Stock'] == "GRAN") {
-                    if ($value['Trans'] == 'buy')
-                        $resultGrain += $value['Quantity'];
-                    elseif ($value['Trans'] == 'sell')
-                        $resultGrain -= $value['Quantity'];
-                }else if($value['Stock'] == "IND") {
-                    if ($value['Trans'] == 'buy')
-                        $resultInd += $value['Quantity'];
-                    elseif ($value['Trans'] == 'sell')
-                        $resultInd -= $value['Quantity'];
-                }else if($value['Stock'] == "OIL") {
-                    if ($value['Trans'] == 'buy')
-                        $resultOil += $value['Quantity'];
-                    elseif ($value['Trans'] == 'sell')
-                        $resultOil -= $value['Quantity'];
-                }else if($value['Stock'] == "TECH") {
-                    if ($value['Trans'] == 'buy')
-                        $resultTech += $value['Quantity'];
-                    elseif ($value['Trans'] == 'sell')
-                        $resultTech -= $value['Quantity'];
-                }
-            }
-
+            $results[$item->Code] = 0;
         }
 
-        $resultArray = [
-            "BOND" => $resultBond,
-            "GOLD" => $resultGold,
-            "GRAN" => $resultGrain,
-            "IND" => $resultInd,
-            "OIL" => $resultOil,
-            "TECH" => $resultTech
-        ];
+        if ( count( $resultset ) > 0 )
+            foreach( $resultset as $result )
+            {
+                $amount = $result["Quantity"];
+                $action = $result["Trans"];
+                $stock  = $result["Stock"];
+                $price  = $result["Value"];
 
-        $holdings = array();
-        array_push($holdings, $resultArray);
-
-        return $holdings;
+                $sign = ( $action == "buy" ) ? 1 : -1;
+                $results[$stock] += $sign * $amount * $price;
+            }
+        return array($results);
     }
-
 }
