@@ -142,7 +142,6 @@ class Transactions extends MY_Model2
 
         foreach( $stocks as $item )
         {
-            array_push($results, $item->Code);
             $results[$item->Code] = 0;
         }
 
@@ -157,13 +156,6 @@ class Transactions extends MY_Model2
                 $sign = ( $action == "buy" ) ? 1 : -1;
                 $results[$stock] += $sign * $amount * $price;
             }
-//        var_dump($results);
-//        die();
-
-        header('Content-Type: application/json');
-        echo json_encode($results);
-        die();
         return array($results);
     }
-
 }
