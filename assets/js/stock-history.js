@@ -1,7 +1,5 @@
 $(function () {
-    var range = [];
-    for (var i = 0; i <= 50; i+=5)
-        range.push(i);
+    var range = []; // Defaults to 0-10
 
     var code = "", values = [], recent = "";
 
@@ -62,7 +60,7 @@ $(function () {
                     name: code,
                     data: values
                 }]
-            });
-        });
-    });
-});
+            }); //End of chart
+        }); //End of movements
+    }); //End of most recent
+}); //End of document ready

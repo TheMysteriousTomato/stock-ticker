@@ -122,8 +122,8 @@ class Player extends Application {
         $this->render();
     }
 
-    public function getTransactions() {
-        $transactions = $this->transactions->getCurrentHoldings("George");
+    public function getTransactions($name) {
+        $transactions = $this->transactions->getCurrentHoldings($name);
         $keys = array_keys($transactions[0]);
         $values = array_values($transactions[0]);
 
