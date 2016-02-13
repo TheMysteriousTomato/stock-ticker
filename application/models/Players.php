@@ -2,12 +2,16 @@
 
 class Players extends MY_Model
 {
-    // constructor
     function __construct()
     {
         parent::__construct('players', 'Player');
     }
 
+    /**
+     * Grabs all the Players.
+     *
+     * @return array
+     */
     function getAllPlayers(){
         $players = $this->all();
 
@@ -24,7 +28,12 @@ class Players extends MY_Model
         return $players;
     }
 
-
+    /**
+     * Calculates the current equity of the requested Player
+     *
+     * @param $player
+     * @return int
+     */
     public function getEquity($player)
     {
         $resultset = null;

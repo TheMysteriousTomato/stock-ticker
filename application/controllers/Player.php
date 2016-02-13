@@ -1,28 +1,11 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: jojoman46
- * Date: 2016-02-12
- * Time: 5:54 AM
- */
+
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Player extends Application {
 
     /**
-     * Index Page for this controller.
-     *
-     * Maps to the following URL
-     * 		http://example.com/index.php/welcome
-     *	- or -
-     * 		http://example.com/index.php/welcome/index
-     *	- or -
-     * Since this controller is set as the default controller in
-     * config/routes.php, it's displayed at http://example.com/
-     *
-     * So any other public methods not prefixed with an underscore will
-     * map to /players.php/welcome/<method_name>
-     * @see https://codeigniter.com/user_guide/general/urls.html
+     * Displays the last recently active Player.
      */
     public function index()
     {
@@ -37,7 +20,7 @@ class Player extends Application {
         $this->data['left-panel-content'] = 'player/players';
         $this->data['right-panel-content'] = 'player/transactions';
 
-
+        /* Grabbing username if logged in */
         if(empty($this->session->userdata('username'))) {
             $latestPlayer = $this->transactions->latestTransaction();
         } else
@@ -49,7 +32,6 @@ class Player extends Application {
         $player_cash  = array();
         $player_names  = array();
         $players     = $this->players->getAllPlayers();
-
 
         foreach( $players as $item )
         {
@@ -67,23 +49,16 @@ class Player extends Application {
         $this->data['form']     = $form;
         $this->data['select']   = $select;
         $this->data['ptrans'] = $this->transactions->getPlayerTransactions($latestPlayer);
-        $holdingsArray = $this->transactions->getCurrentHoldings($this->session->userdata('username'));
-
         $this->data['holdings'] = $this->transactions->getCurrentHoldings($latestPlayer);
-
-//        $this->data['BOND'] =  $holdingsArray["BOND"];
-//        $this->data['GOLD'] =  $holdingsArray["GOLD"];
-//        $this->data['GRAN'] =  $holdingsArray["GRAN"];
-//        $this->data['IND'] =  $holdingsArray["IND"];
-//        $this->data['OIL'] =  $holdingsArray["OIL"];
-//        $this->data['TECH'] =  $holdingsArray["TECH"];
-
-
 
         $this->render();
     }
 
-    public function display(){
+    /**
+     * Displays a Player based on an post request of the dropdown menu.
+     */
+    public function display()
+    {
         $this->data['transactions'] = $this->transactions->getAllTransactions();
         $this->data['players'] = $this->players->getAllPlayers();
         $this->load->helper('form');
@@ -106,6 +81,7 @@ class Player extends Application {
             array_push($player_cash, $item->Cash);
 
         }
+
         $players = array_combine($player_names, $player_names);
 
         $select                 = form_dropdown('player',
@@ -122,6 +98,10 @@ class Player extends Application {
         $this->render();
     }
 
+    /**
+     * Grabs the current holdings of a Player and returns it as a JSON object.
+     * @param $name
+     */
     public function getTransactions($name) {
         $transactions = $this->transactions->getCurrentHoldings($name);
         $keys = array_keys($transactions[0]);

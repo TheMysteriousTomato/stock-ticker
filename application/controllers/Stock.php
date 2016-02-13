@@ -1,16 +1,12 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: jondeluz
- * Date: 2016-02-10
- * Time: 3:41 PM
- */
 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Stock extends Application {
 
-
+    /**
+     * Displays the latest movement of a stock.
+     */
     public function index()
     {
         $this->load->helper('form');
@@ -59,11 +55,12 @@ class Stock extends Application {
         $this->render();
     }
 
-
+    /**
+     * Displays the details of the requested stock.
+     */
     public function display()
     {
         $this->load->helper('form');
-
 
         if(!(empty($this->input->post('stock'))))
         {
