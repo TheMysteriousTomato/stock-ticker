@@ -1,5 +1,10 @@
 # Changelog
 All notable changes to this project will be documented in this file.
+## 1.1.1 Beta - 2016-02-13
+### Cleaned:
+- Stock Controller
+- Stocks Model
+
 ## 1.1.0 Beta - 2016-02-11
 ### Added:
 - Moved transaction table to right-panel
