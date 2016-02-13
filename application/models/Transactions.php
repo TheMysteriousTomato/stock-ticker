@@ -162,11 +162,11 @@ class Transactions extends MY_Model2
             "TECH" => $resultTech
         ];
 
-        $lol = array();
-        array_push($lol, $resultArray);
+        $holdings = array();
+        array_push($holdings, $resultArray);
 
 
-        return $lol;
+        return $holdings;
     }
 
 }
