@@ -32,17 +32,20 @@ class Player extends Application {
         $this->data['players'] = $this->players->getAllPlayers();
         $this->load->helper('form');
 
-
-
         /* Set up data to render page */
         $this->data['title'] = "Stock Ticker";
         $this->data['left-panel-content'] = 'player/players';
-        $this->data['right-panel-content'] = 'player/transactions.php';
+        $this->data['right-panel-content'] = 'player/transactions';
 
 
+        if(empty($this->session->userdata('username'))) {
+            $latestPlayer = $this->transactions->latestTransaction();
+        } else
+            $latestPlayer = $this->session->userdata('username');
 
+        $this->data['Playername'] = $latestPlayer;
 
-        $form       = form_open('player/players');
+        $form       = form_open('player/display');
         $player_cash  = array();
         $player_names  = array();
         $players     = $this->players->getAllPlayers();
@@ -54,52 +57,48 @@ class Player extends Application {
             array_push($player_cash, $item->Cash);
 
         }
-
         $players = array_combine($player_names, $player_names);
 
         $select                 = form_dropdown('player',
-            $players, "Donald",
+            $players, $latestPlayer,
             "class = 'form-control'" .
             "onchange = 'this.form.submit()'");
 
-//        $this->data['Name']     = $this->transactions->getRecentStock();->Name;
-//        $this->data['Code']     = $stock->Code;
-//        $this->data['Category'] = $stock->Category;
-//        $this->data['Value']    = money_format("$%i", $stock->Value);
-//
         $this->data['form']     = $form;
         $this->data['select']   = $select;
-        $this->data['ptrans'] = $this->transactions->getPlayerTransactions($this->session->userdata('username'));
+        $this->data['ptrans'] = $this->transactions->getPlayerTransactions($latestPlayer);
         $holdingsArray = $this->transactions->getCurrentHoldings($this->session->userdata('username'));
-        $this->data['BOND'] =  $holdingsArray["BOND"];
-        $this->data['GOLD'] =  $holdingsArray["GOLD"];
-        $this->data['GRAN'] =  $holdingsArray["GRAN"];
-        $this->data['IND'] =  $holdingsArray["IND"];
-        $this->data['OIL'] =  $holdingsArray["OIL"];
-        $this->data['TECH'] =  $holdingsArray["TECH"];
+
+        $this->data['holdings'] = $this->transactions->getCurrentHoldings($latestPlayer);
+
+//        $this->data['BOND'] =  $holdingsArray["BOND"];
+//        $this->data['GOLD'] =  $holdingsArray["GOLD"];
+//        $this->data['GRAN'] =  $holdingsArray["GRAN"];
+//        $this->data['IND'] =  $holdingsArray["IND"];
+//        $this->data['OIL'] =  $holdingsArray["OIL"];
+//        $this->data['TECH'] =  $holdingsArray["TECH"];
 
 
 
         $this->render();
     }
 
-    public function players(){
+    public function display(){
         $this->data['transactions'] = $this->transactions->getAllTransactions();
         $this->data['players'] = $this->players->getAllPlayers();
         $this->load->helper('form');
         $code = $this->input->post('player');
+        $this->data['Playername'] = $code;
 
         $this->data['title'] = "Stock Ticker";
         $this->data['left-panel-content'] = 'player/players';
         $this->data['right-panel-content'] = 'player/transactions';
         $this->data['player_code'] = $code;
 
-
-        $form       = form_open('player/players');
+        $form       = form_open('player/display');
         $player_cash  = array();
         $player_names  = array();
         $players     = $this->players->getAllPlayers();
-
 
         foreach( $players as $item )
         {
@@ -107,7 +106,6 @@ class Player extends Application {
             array_push($player_cash, $item->Cash);
 
         }
-
         $players = array_combine($player_names, $player_names);
 
         $select                 = form_dropdown('player',
@@ -116,24 +114,33 @@ class Player extends Application {
             "class = 'form-control'" .
             "onchange = 'this.form.submit()'");
 
-//        $this->data['Name']     = $stock->Name;
-//        $this->data['Code']     = $stock->Code;
-//        $this->data['Category'] = $stock->Category;
-//        $this->data['Value']    = money_format("$%i", $stock->Value);
-
         $this->data['form']     = $form;
         $this->data['select']   = $select;
         $this->data['ptrans'] = $this->transactions->getPlayerTransactions($code);
         $this->data['holdings'] = $this->transactions->getCurrentHoldings($code);
-        $holdingsArray = $this->transactions->getCurrentHoldings($code);
-        $this->data['BOND'] =  $holdingsArray["BOND"];
-        $this->data['GOLD'] =  $holdingsArray["GOLD"];
-        $this->data['GRAN'] =  $holdingsArray["GRAN"];
-        $this->data['IND'] =  $holdingsArray["IND"];
-        $this->data['OIL'] =  $holdingsArray["OIL"];
-        $this->data['TECH'] =  $holdingsArray["TECH"];
-
 
         $this->render();
+    }
+
+    public function getTransactions() {
+        $transactions = $this->transactions->getCurrentHoldings("George");
+        $keys = array_keys($transactions[0]);
+        $values = array_values($transactions[0]);
+
+        $dataPoints = array();
+        foreach($values as $value)
+        {
+            $arr = array();
+            array_push($arr, $value);
+            array_push($dataPoints, $arr);
+        }
+
+        $result = array();
+
+        array_push($result, $keys);
+        array_push($result, $dataPoints);
+
+        $this->output->set_header('Content-Type: application/json; charset=utf-8');
+        echo json_encode($result);
     }
 }

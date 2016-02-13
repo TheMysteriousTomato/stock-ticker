@@ -1,13 +1,23 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## 1.0.11 - 2016-02-11
+### Added:
+- Load most active player if no player is logged in
+- Reduced code in Player Controller and Transaction Model
+### Fixed:
+- Fix Players/index - no playername
+
 ## 1.0.10 - 2016-02-11
 ### Added:
-- Homepage: fix links to stock history pages
 - Change navbar with appropriate names
-- Fix login and logoff redirect
 - Transactions for stocks
 - Style for transactions
+### Fixed:
+- Homepage: fix links to stock history pages
+- Fix login and logoff redirect
+- Fix json header conflict
+- Fix .htaccess
 
 ## 1.0.9 - 2016-02-11
 ### Added:
