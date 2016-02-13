@@ -24,6 +24,7 @@ class Players extends MY_Model
         return $players;
     }
 
+
     public function getEquity($player)
     {
         $resultset = null;
@@ -38,7 +39,6 @@ class Players extends MY_Model
         {
             $resultset = $query->result_array();
         }
-
         $result = 0;
 
         if($resultset != null)
