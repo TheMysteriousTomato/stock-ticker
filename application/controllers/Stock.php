@@ -20,17 +20,9 @@ class Stock extends Application {
         $trans = $this->transactions->getSalesTransactions($stock->Code);
 
         $form        = form_open('stock/display');
-        $stock_codes = array();
-        $stock_names = array();
-        $stocks      = $this->stocks->getAllStocks();
 
-        foreach( $stocks as $item )
-        {
-            array_push($stock_codes, $item->Code);
-            array_push($stock_names, $item->Name);
-        }
+        $stocks      = $this->stocks->getAllStocksForDisplay();
 
-        $stocks = array_combine($stock_codes, $stock_names);
 
 
         $select = form_dropdown('stock',
@@ -80,18 +72,10 @@ class Stock extends Application {
         $this->data['trans'] = $this->transactions->getSalesTransactions($code);
 
         $form        = form_open('stock/display');
-        $stock_codes = array();
-        $stock_names = array();
-        $stocks      = $this->stocks->getAllStocks();
+        $stocks      = $this->stocks->getAllStocksForDisplay();
         $stock       = $this->stocks->get($code);
 
-        foreach( $stocks as $item )
-        {
-            array_push($stock_codes, $item->Code);
-            array_push($stock_names, $item->Name);
-        }
 
-        $stocks = array_combine($stock_codes, $stock_names);
 
         $select                 = form_dropdown('stock',
                                                 $stocks,
