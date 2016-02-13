@@ -14,15 +14,15 @@ if ( !defined( 'APPPATH' ) )
 
     <!-- Custom Stylesheet -->
     <link rel="stylesheet" href="/assets/css/temp.css">
-
-
+    
     <!-- jQuery -->
     <script src="/assets/js/jQuery.min.js"></script>
 
+    <!-- Highcharts -->
+    <script src="/assets/js/highcharts.js"></script>
 
-
-    <script src="https://code.highcharts.com/highcharts.js"></script>
-    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <!-- Module Export -->
+    <script src="/assets/js/module-exporting.js"></script>
     </head>
 <body>
     {header}
@@ -31,6 +31,5 @@ if ( !defined( 'APPPATH' ) )
 
     <!-- Latest compiled and minified JavaScript -->
     <script src="/assets/js/bootstrap.min.js"></script>
-
 </body>
 </html>
