@@ -28,10 +28,6 @@ class Stock extends Application {
                                                             $stock->Code,
                                                             "class = 'form-control'" .
                                                             "onchange = 'this.form.submit()'");
-
-        //hokey
-        $this->data['src'] = "../assets/js/stock-history.js";
-
         $this->render();
     }
 
@@ -43,12 +39,10 @@ class Stock extends Application {
         if(!(empty($this->input->post('stock'))))
         {
             $code = $this->input->post('stock');
-            $this->data['src'] = "../assets/js/stock-history.js";
         }
         else
         {
             $code = $this->uri->segment(3);
-            $this->data['src'] = "../../assets/js/stock-history.js";
         }
 
         $stocks    = $this->stocks->getAllStocksForDisplay();

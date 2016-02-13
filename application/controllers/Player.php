@@ -10,10 +10,13 @@ class Player extends Application {
     public function index()
     {
         /* Grabbing username if logged in */
-        if(empty($this->session->userdata('username'))) {
+        if(empty($this->session->userdata('username')))
+        {
             $latestPlayer = $this->players->latestTransaction();
         } else
+        {
             $latestPlayer = $this->session->userdata('username');
+        }
 
         /* Grab data from database for Transactions and Players */
         $this->data['transactions'] = $this->players->getAllTransactions();
