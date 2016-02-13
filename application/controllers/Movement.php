@@ -8,14 +8,15 @@ class Movement extends Application
     public function getMovements($code)
     {
         $movements = $this->movements->displayMovements($code);
-        $data['json'] = json_encode($movements);
-        $this->load->view('templates/_json', $data);
+        $this->output->set_header('Content-Type: application/json; charset=utf-8');
+        echo json_encode($movements);
+
     }
 
     public function getMostRecent()
     {
         $recent = $this->movements->latestMovement();
-        $data['json'] = json_encode($recent);
-        $this->load->view('templates/_json', $data);
+        $this->output->set_header('Content-Type: application/json; charset=utf-8');
+        echo json_encode($recent);
     }
 }
