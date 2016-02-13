@@ -17,6 +17,7 @@ class Stock extends Application {
                            'Category' => $stock->Category,
                            'Value'    => money_format("$%i", $stock->Value));
 
+        /* Set up data to render page */
         $this->data['title']               = "Stocks ~ $stock->Code";
         $this->data['left-panel-content']  = 'stock/index';
         $this->data['right-panel-content'] = 'stock/sales';
@@ -36,6 +37,7 @@ class Stock extends Application {
      */
     public function display()
     {
+        /* Either get stock from submit/url */
         if(!(empty($this->input->post('stock'))))
         {
             $code = $this->input->post('stock');
@@ -52,6 +54,7 @@ class Stock extends Application {
                            'Category' => $stock->Category,
                            'Value'    => money_format("$%i", $stock->Value));
 
+        /* Set up data to render page */
         $this->data['title']               = "Stocks ~ $code";
         $this->data['left-panel-content']  = 'stock/index';
         $this->data['right-panel-content'] = 'stock/sales';

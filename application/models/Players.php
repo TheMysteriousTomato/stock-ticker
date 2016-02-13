@@ -22,7 +22,7 @@ class Players extends MY_Model
             $player->Equity = $this->players->getEquity($player->Player);
 
             // Add a link to each player's portfolio
-            $player->href = '/players/' . $player->Player;
+            $player->href = '/player/display/' . $player->Player;
         }
 
         return $players;

@@ -43,8 +43,17 @@ class Player extends Application {
      */
     public function display()
     {
-        $name = $this->input->post('player');
+        /* Either get player from submit/url */
+        if(!(empty($this->input->post('player'))))
+        {
+            $name = $this->input->post('player');
+        }
+        else
+        {
+            $name = $this->uri->segment(3);
+        }
 
+        /* Set up data to render page */
         $this->data['title']               = "Player ~ $name";
         $this->data['left-panel-content']  = 'player/players';
         $this->data['right-panel-content'] = 'player/transactions';
