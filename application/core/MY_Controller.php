@@ -24,6 +24,11 @@ class Application extends CI_Controller {
         $this->data          = array();
         $this->data['title'] = '?';
         $this->errors        = array();
+
+        $players_link = '<button type="button" class="btn btn-info">Players</button>';
+        $stocks_link = '<button type="button" class="btn btn-info">Stocks</button>';
+        $this->data['stocks_link'] = anchor('stock', $stocks_link, 'title="List of All the Stocks"');
+        $this->data['players_link'] = anchor('player', $players_link, 'title="List of All the Players"');
     }
 
     /**

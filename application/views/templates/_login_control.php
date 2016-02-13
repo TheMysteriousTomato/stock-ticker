@@ -2,5 +2,5 @@
     <div class='form-group'>
         <input name='username' type='text' class='form-control' placeholder='Username'>
     </div>
-    <button type='submit' class='btn btn-default'>Login</button>
+    <button type='submit' class='btn btn-success'>Login</button>
 </form>
