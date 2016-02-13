@@ -23,7 +23,12 @@ $(function () {
 
             $.each(data, function( index, value ) {
                 code = value.Code;
-                values.push(parseInt(value.Amount));
+                var up_down = 1;
+
+                if ( value.Action == "down" )
+                    up_down = -1;
+
+                values.push(parseInt(value.Amount) * up_down);
             });
 
 

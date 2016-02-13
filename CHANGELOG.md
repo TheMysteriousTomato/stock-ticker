@@ -4,6 +4,8 @@ All notable changes to this project will be documented in this file.
 ## 1.0.10 - 2016-02-11
 ### Added:
 - Change navbar with appropriate names
+- Transactions for stocks
+- Style for transactions
 ### Fixed:
 - Homepage: fix links to stock history pages
 - Fix login and logoff redirect
