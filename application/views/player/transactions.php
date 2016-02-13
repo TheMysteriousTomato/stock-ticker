@@ -1,26 +1,24 @@
 <h2 class="text-center underline">Transactions</h2>
-<table class="table table-striped">
+<table class="table">
     <thead>
     <tr>
-        <th>Bonds</th>
-        <th>Gold</th>
-        <th>Grain</th>
-        <th>Industrial</th>
-        <th>Oil</th>
-        <th>Technology</th>
+        <th>DateTime</th>
+        <th>Player</th>
+        <th>Stock</th>
+        <th>Trans</th>
+        <th>Quantity</th>
     </tr>
     </thead>
     <tbody>
-    {holdings}
-    <tr>
-        <td>{BOND}</td>
-        <td>{GOLD}</td>
-        <td>{GRAN}</td>
-        <td>{IND}</td>
-        <td>{OIL}</td>
-        <td>{TECH}</td>
+    {ptrans}
+    <tr class="row-{Trans}">
+        <td>{DateTime}</td>
+        <td>{Player}</td>
+        <td>{Stock}</td>
+        <td>{Trans}</td>
+        <td>{Quantity}</td>
     </tr>
-    {/holdings}
+
+    {/ptrans}
     </tbody>
 </table>
-
