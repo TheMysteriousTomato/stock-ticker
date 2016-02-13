@@ -3,9 +3,12 @@ All notable changes to this project will be documented in this file.
 
 ## 1.0.10 - 2016-02-11
 ### Added:
-- Homepage: fix links to stock history pages
 - Change navbar with appropriate names
+### Fixed:
+- Homepage: fix links to stock history pages
 - Fix login and logoff redirect
+- Fix json header conflict
+- Fix .htaccess
 
 ## 1.0.9 - 2016-02-11
 ### Added:
