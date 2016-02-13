@@ -58,4 +58,13 @@ class Stocks extends MY_Model
         $key = $this->movements->latestMovement();
         return $this->get($key);
     }
+
+    /**
+     * Grabs all transactions for the stock
+     * @param $code
+     * @return mixed
+     */
+    function getSalesTransactions($code){
+        return $this->transactions->getSalesTransactions($code);
+    }
 }

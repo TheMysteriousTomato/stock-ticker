@@ -9,40 +9,28 @@ class Stock extends Application {
      */
     public function index()
     {
-        $this->load->helper('form');
+        $stock     = $this->stocks->getRecentStock();
+        $trans     = $this->stocks->getSalesTransactions($stock->Code);
+        $stocks    = $this->stocks->getAllStocksForDisplay();
+        $stockinfo = array('Name'     => $stock->Name,
+                           'Code'     => $stock->Code,
+                           'Category' => $stock->Category,
+                           'Value'    => money_format("$%i", $stock->Value));
 
-        $this->data['title'] = "Stocks";
+        $this->data['title']               = "Stocks ~ $stock->Code";
         $this->data['left-panel-content']  = 'stock/index';
         $this->data['right-panel-content'] = 'stock/sales';
-
-        $stock = $this->stocks->getRecentStock();
-
-        $trans = $this->transactions->getSalesTransactions($stock->Code);
-
-        $form        = form_open('stock/display');
-
-        $stocks      = $this->stocks->getAllStocksForDisplay();
-
-
-
-        $select = form_dropdown('stock',
-                                $stocks,
-                                $stock->Code,
-                                "class = 'form-control'" .
-                                "onchange = 'this.form.submit()'");
-
-        $this->data['Name']     = $stock->Name;
-        $this->data['Code']     = $stock->Code;
-        $this->data['Category'] = $stock->Category;
-        $this->data['Value']    = money_format("$%i", $stock->Value);
-
-        $this->data['form']     = $form;
-        $this->data['select']   = $select;
+        $this->data['trans']               = $trans;
+        $this->data['info']                = array($stockinfo);
+        $this->data['form']                = form_open('stock/display');
+        $this->data['select']              = form_dropdown('stock',
+                                                            $stocks,
+                                                            $stock->Code,
+                                                            "class = 'form-control'" .
+                                                            "onchange = 'this.form.submit()'");
 
         //hokey
         $this->data['src'] = "../assets/js/stock-history.js";
-
-        $this->data['trans'] = $trans;
 
         $this->render();
     }
@@ -52,44 +40,37 @@ class Stock extends Application {
      */
     public function display()
     {
-        $this->load->helper('form');
-
         if(!(empty($this->input->post('stock'))))
         {
             $code = $this->input->post('stock');
             $this->data['src'] = "../assets/js/stock-history.js";
         }
-        else {
+        else
+        {
             $code = $this->uri->segment(3);
             $this->data['src'] = "../../assets/js/stock-history.js";
         }
 
-        $this->data['title'] = "Stocks ~ $code";
-        $this->data['left-panel-content'] = 'stock/index';
+        $stocks    = $this->stocks->getAllStocksForDisplay();
+        $stock     = $this->stocks->get($code);
+        $stockinfo = array('Name'     => $stock->Name,
+                           'Code'     => $stock->Code,
+                           'Category' => $stock->Category,
+                           'Value'    => money_format("$%i", $stock->Value));
+
+        $this->data['title']               = "Stocks ~ $code";
+        $this->data['left-panel-content']  = 'stock/index';
         $this->data['right-panel-content'] = 'stock/sales';
-        $this->data['stock_code'] = $code;
+        $this->data['stock_code']          = $code;
+        $this->data['trans']               = $this->stocks->getSalesTransactions($code);
+        $this->data['info']                = array($stockinfo);
+        $this->data['form']                = form_open('stock/display');
+        $this->data['select']              = form_dropdown('stock',
+                                                          $stocks,
+                                                          $code,
+                                                          "class = 'form-control'" .
+                                                          "onchange = 'this.form.submit()'");
 
-        $this->data['trans'] = $this->transactions->getSalesTransactions($code);
-
-        $form        = form_open('stock/display');
-        $stocks      = $this->stocks->getAllStocksForDisplay();
-        $stock       = $this->stocks->get($code);
-
-
-
-        $select                 = form_dropdown('stock',
-                                                $stocks,
-                                                $code,
-                                                "class = 'form-control'" .
-                                                "onchange = 'this.form.submit()'");
-
-        $this->data['Name']     = $stock->Name;
-        $this->data['Code']     = $stock->Code;
-        $this->data['Category'] = $stock->Category;
-        $this->data['Value']    = money_format("$%i", $stock->Value);
-
-        $this->data['form']     = $form;
-        $this->data['select']   = $select;
         $this->render();
     }
 
