@@ -1,5 +1,5 @@
 <h2 class="text-center underline">Stocks</h2>
-<table class="table table-striped">
+<table class="table">
     <thead>
     <tr>
         <th>Timestamp</th>
@@ -11,7 +11,7 @@
     </thead>
     <tbody>
     {trans}
-    <tr class="row-{type}">
+    <tr class="row-{Trans}">
         <td>{DateTime}</td>
         <td>{Player}</td>
         <td>{Stock}</td>

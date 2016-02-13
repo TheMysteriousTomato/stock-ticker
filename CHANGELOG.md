@@ -7,7 +7,7 @@ All notable changes to this project will be documented in this file.
 - Change navbar with appropriate names
 - Fix login and logoff redirect
 - Transactions for stocks
-
+- Style for transactions
 
 ## 1.0.9 - 2016-02-11
 ### Added:

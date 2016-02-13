@@ -24,3 +24,15 @@ select {
     font-family: Serif, serif;
     font-size: 1.5em;
 }
+
+th {
+    background: lightgrey;
+}
+
+.row-buy {
+    background: lightgreen
+}
+
+.row-sell {
+    background: lightcoral;
+}
