@@ -1,15 +1,19 @@
+/* Bring page up to navbar */
 .navbar {
     margin-bottom: 0;
 }
 
+/* Push page content down after drop down */
 select {
     margin-bottom: 5%;
 }
 
+/* Underlines text */
 .underline {
     text-decoration: underline;
 }
 
+/* Strech panels in desktop */
 @media screen and (min-width: 768px){
     .players-panel, .stocks-panel {
         height: 100vh;
@@ -18,23 +22,34 @@ select {
     }
 }
 
+/* Remove logo on graphs */
 .highcharts-container svg text[zIndex="8"] {
     display: none
 }
 
+/* Bigger & Centered logo in navbar */
 .navbar-brand {
     font-family: Serif, serif;
     font-size: 1.5em;
+    vertical-align: middle;
 }
 
+/* Top of tables have a grey bar */
 th {
-    background: lightgrey;
+    background: #eeeeee;
 }
 
+/* Rows with stocks that are bought */
 .row-buy {
     background: lightgreen
 }
 
+/* Rows with stocks that are sold */
 .row-sell {
     background: lightcoral;
+}
+
+/* Reduce image size of logo image in navbar */
+.logo {
+    max-height:45px;
 }

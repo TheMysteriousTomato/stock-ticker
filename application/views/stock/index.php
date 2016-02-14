@@ -10,5 +10,8 @@
 <div id="stock_code" class="hidden-xs hidden-sm hidden-md hidden-lg">{stock_code}</div>
 <div id="stock_code" class="hidden-xs hidden-sm hidden-md hidden-lg">{url}</div>
 
+<!-- Graph Container -->
 <div id="temp-stocks"></div>
-<script src={src}></script>
+
+<!-- Inject Graph -->
+<script src="/assets/js/stock-history.js"></script>

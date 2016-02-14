@@ -9,7 +9,12 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="/">The Mysterious Tomato ~ Stock Ticker</a>
+                <a class="navbar-brand" href="/">
+                    <span>
+                        <img class="logo" src="/assets/images/logo.jpg" alt="logo">
+                    </span>
+                    The Mysterious Tomato ~ Stock Ticker
+                </a>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
