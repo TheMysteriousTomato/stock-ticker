@@ -23,6 +23,7 @@ class Application extends CI_Controller {
         parent::__construct();
         $this->data          = array();
         $this->data['title'] = '?';
+        $this->data['date']  = date('l\, F jS Y');
         $this->errors        = array();
 
         $players_link = '<button type="button" class="btn btn-info">Players</button>';
