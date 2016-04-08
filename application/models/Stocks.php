@@ -4,7 +4,7 @@ class Stocks extends MY_Model
 {
     function __construct()
     {
-        parent::__construct('stocks','Code');
+        parent::__construct('stocks','code');
     }
 
     /**
@@ -15,12 +15,13 @@ class Stocks extends MY_Model
     function getAllStocks()
     {
         $stocks = $this->all();
+        //print_r($stocks);
 
         /* Add additional attributes to each Stock */
         foreach ($stocks as $stock)
         {
             // Add a link to each stock's history page
-            $stock->href = '/stock/display/' . $stock->Code;
+            $stock->href = '/stock/display/' . $stock->code;
         }
 
         return $stocks;
@@ -37,9 +38,9 @@ class Stocks extends MY_Model
         foreach ($stocks as $stock)
         {
             // Add a link to each stock's history page
-            $stock->href = '/stock/display/' . $stock->Code;
-            array_push($stock_codes, $stock->Code);
-            array_push($stock_names, $stock->Name);
+            $stock->href = '/stock/display/' . $stock->code;
+            array_push($stock_codes, $stock->code);
+            array_push($stock_names, $stock->name);
         }
 
         $stocks = array_combine($stock_codes, $stock_names);

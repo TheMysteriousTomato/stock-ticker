@@ -20,7 +20,7 @@ class Player extends Application {
 
         /* Grab data from database for Transactions and Players */
         $this->data['transactions'] = $this->players->getAllTransactions();
-        $this->data['players']      = $this->players->getAllPlayers();
+        //$this->data['players']      = $this->players->getAllPlayers();
 
         /* Set up data to render page */
         $this->data['title'] = "Players ~ $latestPlayer";

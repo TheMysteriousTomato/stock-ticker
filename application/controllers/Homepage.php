@@ -11,7 +11,7 @@ class Homepage extends Application {
     {
         /* Grab data from database for Stocks and Players */
         $this->data['stocks'] = $this->stocks->getAllStocks();
-        $this->data['players'] = $this->players->getAllPlayers();
+        //$this->data['players'] = $this->players->getAllPlayers();
 
         /* Set up data to render page */
         $this->data['title'] = "Stock Ticker";
