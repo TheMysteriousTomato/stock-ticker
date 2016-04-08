@@ -229,9 +229,30 @@ class MY_Model extends CI_Model implements Active_Record {
 //---------------------------------------------------------------------------
     // Return all records as an array of objects
     function all() {
-        $this->db->order_by($this->_keyField, 'asc');
-        $query = $this->db->get($this->_tableName);
-        return $query->result();
+//        $this->db->order_by($this->_keyField, 'asc');
+//        $query = $this->db->get($this->_tableName);
+
+        $url="http://bsx.jlparry.com/data/" . $this->_tableName;
+        $assocData = array();
+        $headerRecord = array();
+        if( ($handle = fopen( $url, "r")) !== FALSE) {
+            $rowCounter = 0;
+            while (($rowData = fgetcsv($handle, 0, ",")) !== FALSE) {
+                if( 0 === $rowCounter) {
+                    $headerRecord = $rowData;
+                } else {
+                    $c = new stdClass();
+
+                    foreach( $rowData as $key => $value) {
+                        $c->$headerRecord[$key] = $value;
+                    }
+                    $assocData[ $rowCounter - 1] = $c;
+                }
+                $rowCounter++;
+            }
+            fclose($handle);
+        }
+        return $assocData;
     }
 
     // Return all records as a result set
@@ -261,6 +282,36 @@ class MY_Model extends CI_Model implements Active_Record {
             return $result[0]->num;
         else
             return null;
+    }
+
+    function search($headerCol, $item) {
+        $url="http://bsx.jlparry.com/data/" . $this->_tableName;
+        $assocData = array();
+        $headerRecord = array();
+        $data = array();
+        $headerColNum = 0;
+        if( ($handle = fopen( $url, "r")) !== FALSE) {
+            $rowCounter = 0;
+            while (($rowData = fgetcsv($handle, 0, ",")) !== FALSE) {
+                if( 0 === $rowCounter) {
+                    $headerRecord = $rowData;
+                    for($i = 0; $i < sizeof($headerRecord); $i++){
+                        if($headerRecord[$i] == $headerCol)
+                            $headerColNum = $i;
+                    }
+                } else {
+                    foreach( $rowData as $key => $value) {
+                        $data[ $headerRecord[ $key] ] = $value;
+                    }
+                    if($data[$headerRecord[$headerColNum]] == $item)
+                        $assocData[ $rowCounter - 1] = $data;
+                }
+                $rowCounter++;
+            }
+            fclose($handle);
+        }
+
+        return $assocData;
     }
 
 }

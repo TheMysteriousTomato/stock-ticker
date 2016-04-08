@@ -12,11 +12,11 @@
     <tbody>
     {trans}
     <tr class="row-{Trans}">
-        <td>{DateTime}</td>
-        <td>{Player}</td>
-        <td>{Stock}</td>
-        <td>{Trans}</td>
-        <td>{Quantity}</td>
+        <td>{datetime}</td>
+        <td>{player}</td>
+        <td>{stock}</td>
+        <td>{trans}</td>
+        <td>{quantity}</td>
     </tr>
     {/trans}
     </tbody>

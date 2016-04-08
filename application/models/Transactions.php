@@ -93,29 +93,10 @@ class Transactions extends MY_Model2
      */
     public function getSalesTransactions($stock){
 
-        $this->db->select('*');
-        $this->db->from('transactions t');
-        $this->db->where('t.Stock', $stock);
-        $query = $this->db->get();
+        $transactionsForStock =  $this->search("stock", $stock);
 
-        $item = [
-            "DateTime" => "N/A",
-            "Player"   => "N/A",
-            "Stock"    => "N/A",
-            "Trans"    => "N/A",
-            "Quantity" => "N/A"
-        ];
 
-        $resultset = array();
-
-        array_push($resultset, $item);
-
-        if($query->num_rows() != 0)
-        {
-            $resultset = $query->result_array();
-        }
-
-        return $resultset;
+        return $transactionsForStock;
     }
 
     /**
