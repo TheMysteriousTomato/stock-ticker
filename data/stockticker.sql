@@ -83,6 +83,7 @@ CREATE TABLE IF NOT EXISTS `players` (
   `Player` varchar(20) NOT NULL,
   `password` varchar(64) NOT NULL,
   `role` varchar(20) NOT NULL,
+  `avatar` varchar(20) NOT NULL,
   `Cash` int(4) DEFAULT NULL,
     PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
