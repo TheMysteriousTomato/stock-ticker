@@ -1,3 +1,4 @@
+# noinspection SqlNoDataSourceInspectionForFile
 -- phpMyAdmin SQL Dump
 -- version 4.4.14.1
 -- http://www.phpmyadmin.net
@@ -85,6 +86,17 @@ CREATE TABLE IF NOT EXISTS `players` (
   `Cash` int(4) DEFAULT NULL,
     PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+DROP TABLE IF EXISTS `ci_sessions`;
+# create the sessions storage file
+CREATE TABLE IF NOT EXISTS `ci_sessions` (
+  `id` varchar(40) NOT NULL,
+  `ip_address` varchar(45) NOT NULL,
+  `timestamp` int(10) unsigned DEFAULT 0 NOT NULL,
+  `data` blob NOT NULL,
+  PRIMARY KEY (id),
+  KEY `ci_sessions_timestamp` (`timestamp`)
+);
 
 --
 -- Dumping data for table `players`
