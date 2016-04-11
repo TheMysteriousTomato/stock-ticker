@@ -6,5 +6,5 @@
             Upload <input type="file" name="avatar">
         </span>
     </div>
-    <button type='submit' class='btn btn-success'>Login</button>
+    <button type='submit' class='btn btn-success'>GO!</button>
 </form>
