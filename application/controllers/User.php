@@ -49,10 +49,11 @@ class User extends Application {
                 if(!$this->upload->do_upload("avatar")) {
                     $error = $this->upload->display_errors();
                     var_dump($error);
+                    die();
                 }
                 else {
                     $filedata = $this->upload->data();
-                    $player->avatar = $filedata['full_path'];
+                    $player->avatar = '/uploads/' . $filedata['file_name'];
                 }
             }
 
