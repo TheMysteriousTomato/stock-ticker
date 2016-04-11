@@ -15,7 +15,7 @@ class User extends Application {
         $player = $this->players->some('Player', $user);
 
         // If player exists
-        if ( !is_null($player[0]) )
+        if ( !empty($player) )
         {
             // If password matches
             if ( strcmp( $player[0]->password, sha1($pass) ) == 0 )
@@ -26,8 +26,7 @@ class User extends Application {
             }
 
         }
-        else
-        {
+        else {
             // Register player
 
             // hash password
@@ -35,10 +34,27 @@ class User extends Application {
 
             // new empty user
             $player = $this->players->create();
-            $player->Player   = $user;
+            $player->Player = $user;
             $player->password = $new_pass;
-            $player->role     = ROLE_PLAYER;
-            $player->Cash     = 1000;
+            $player->role = ROLE_PLAYER;
+            $player->Cash = 1000;
+
+            if (!($img)) {
+                $config['upload_path'] = './uploads/';
+                $config['allowed_types'] = 'gif|jpg|png';
+                $config['file_name'] = $user;
+
+                $this->load->library('upload', $config);
+
+                if(!$this->upload->do_upload("avatar")) {
+                    $error = $this->upload->display_errors();
+                    var_dump($error);
+                }
+                else {
+                    $filedata = $this->upload->data();
+                    $player->avatar = $filedata['full_path'];
+                }
+            }
 
             // add user to db
             $this->players->add($player);
@@ -59,5 +75,4 @@ class User extends Application {
 
         redirect(base_url());
     }
-
 }

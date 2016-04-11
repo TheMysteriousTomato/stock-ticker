@@ -137,3 +137,5 @@ Network Trash Folder
 Temporary Items
 .apdisk
 
+# Image Uploads
+uploads/*
