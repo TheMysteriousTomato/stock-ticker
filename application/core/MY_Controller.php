@@ -40,7 +40,7 @@ class Application extends CI_Controller {
         if(empty($this->session->userdata('username'))) {
             $this->data['login_control'] = $this->parser->parse('templates/_login_control', $this->data, true);
         } else {
-            $data = array('username' => $this->session->userdata('username'));
+            $data = array('username' => $this->session->userdata('username'), 'avatar' => $this->session->userdata('avatar'));
             $this->data['login_control'] = $this->parser->parse('templates/_logout_control', $data, true);
 
         }
