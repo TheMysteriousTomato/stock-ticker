@@ -21,7 +21,7 @@ class User extends Application {
             if ( strcmp( $player[0]->password, sha1($pass) ) == 0 )
             {
                 // start session for player
-                $userdata = array('username' => $user);
+                $userdata = array('username' => $user, 'avatar' => $player[0]->avatar);
                 $this->session->set_userdata($userdata);
             }
 
@@ -49,10 +49,11 @@ class User extends Application {
                 if(!$this->upload->do_upload("avatar")) {
                     $error = $this->upload->display_errors();
                     var_dump($error);
+                    die();
                 }
                 else {
                     $filedata = $this->upload->data();
-                    $player->avatar = $filedata['full_path'];
+                    $player->avatar = '/uploads/' . $filedata['file_name'];
                 }
             }
 
@@ -60,7 +61,7 @@ class User extends Application {
             $this->players->add($player);
 
             // start session for player
-            $userdata = array('username' => $user);
+            $userdata = array('username' => $user, 'avatar' => $player->avatar);
             $this->session->set_userdata($userdata);
         }
 
