@@ -12,13 +12,13 @@ class User extends Application {
         $pass  = $this->input->post('password');
         $img   = $this->input->post('avatar');
 
-        $player = $this->players->get($user);
+        $player = $this->players->some('Player', $user);
 
         // If player exists
-        if ( !is_null($player) )
+        if ( !is_null($player[0]) )
         {
             // If password matches
-            if ( strcmp( $player->password, sha1($pass) ) == 0 )
+            if ( strcmp( $player[0]->password, sha1($pass) ) == 0 )
             {
                 // start session for player
                 $userdata = array('username' => $user);
