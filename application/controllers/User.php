@@ -35,7 +35,6 @@ class User extends Application {
 
             // new empty user
             $player = $this->players->create();
-
             $player->Player   = $user;
             $player->password = $new_pass;
             $player->role     = ROLE_PLAYER;

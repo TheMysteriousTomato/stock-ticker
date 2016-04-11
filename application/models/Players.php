@@ -4,7 +4,7 @@ class Players extends MY_Model
 {
     function __construct()
     {
-        parent::__construct('players', 'Player');
+        parent::__construct('players', 'id');
     }
 
     /**

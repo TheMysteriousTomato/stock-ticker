@@ -183,6 +183,7 @@ class MY_Model extends CI_Model implements Active_Record {
         }
         // update the DB table appropriately
         $key = $data[$this->_keyField];
+        $this->db->insert_id();
         $object = $this->db->insert($this->_tableName, $data);
     }
 

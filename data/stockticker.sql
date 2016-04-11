@@ -79,7 +79,7 @@ INSERT INTO `movements` (`Datetime`, `Code`, `Action`, `Amount`) VALUES
 DROP TABLE IF EXISTS `players`;
 
 CREATE TABLE IF NOT EXISTS `players` (
-  `id` varchar(10) NOT NULL,
+  `id` int(4) NOT NULL AUTO_INCREMENT,
   `Player` varchar(20) NOT NULL,
   `password` varchar(64) NOT NULL,
   `role` varchar(20) NOT NULL,
