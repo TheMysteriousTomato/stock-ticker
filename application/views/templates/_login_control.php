@@ -1,4 +1,4 @@
-<form class='navbar-form navbar-right' action='/user/login' method='post'>
+<form class='navbar-form navbar-right' action='/user/login' method='post' enctype="multipart/form-data">
     <div class='form-group'>
         <input name='username' type='text'     class='form-control' placeholder='Username'>
         <input name='password' type='password' class='form-control' placeholder='Password'>
