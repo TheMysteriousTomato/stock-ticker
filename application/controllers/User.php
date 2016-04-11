@@ -9,8 +9,45 @@ class User extends Application {
      */
     public function login(){
         $user  = $this->input->post('username');
-        $userdata = array('username' => $user);
-        $this->session->set_userdata($userdata);
+        $pass  = $this->input->post('password');
+        $img   = $this->input->post('avatar');
+
+        $player = $this->players->get($user);
+
+        // If player exists
+        if ( !is_null($player) )
+        {
+            // If password matches
+            if ( strcmp( $player->password, sha1($pass) ) == 0 )
+            {
+                // start session for player
+                $userdata = array('username' => $user);
+                $this->session->set_userdata($userdata);
+            }
+
+        }
+        else
+        {
+            // Register player
+
+            // hash password
+            $new_pass = sha1($pass);
+
+            // new empty user
+            $player = $this->players->create();
+
+            $player->Player   = $user;
+            $player->password = $new_pass;
+            $player->role     = ROLE_PLAYER;
+            $player->Cash     = 1000;
+
+            // add user to db
+            $this->players->add($player);
+
+            // start session for player
+            $userdata = array('username' => $user);
+            $this->session->set_userdata($userdata);
+        }
 
         redirect(base_url());
     }

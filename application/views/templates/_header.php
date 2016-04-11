@@ -10,9 +10,6 @@
                     <span class="icon-bar"></span>
                 </button>
                 <a class="navbar-brand" href="/">
-                    <span>
-                        <img class="logo" src="/assets/images/logo.jpg" alt="logo">
-                    </span>
                     The Mysterious Tomato ~ Stock Ticker
                 </a>
             </div>
