@@ -15,6 +15,9 @@ if ( !defined( 'APPPATH' ) )
     <!-- Custom Stylesheet -->
     <link rel="stylesheet" href="/assets/css/temp.css">
 
+    <!-- Switch Stylesheet -->
+    <link rel="stylesheet" href="/assets/css/bootstrap-switch.min.css">
+
     <!-- jQuery -->
     <script src="/assets/js/jQuery.min.js"></script>
 
@@ -23,13 +26,16 @@ if ( !defined( 'APPPATH' ) )
 
     <!-- Module Export -->
     <script src="/assets/js/module-exporting.js"></script>
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="/assets/js/bootstrap.min.js"></script>
+
+    <!-- Bootstrap Switch -->
+    <script src="/assets/js/bootstrap-switch.min.js"></script>
 </head>
 <body>
     {header}
     {content}
     {footer}
-
-    <!-- Latest compiled and minified JavaScript -->
-    <script src="/assets/js/bootstrap.min.js"></script>
 </body>
 </html>
