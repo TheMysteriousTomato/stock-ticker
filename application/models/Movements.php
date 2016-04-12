@@ -26,7 +26,7 @@ class Movements extends MY_Model2
      */
     function latestMovement()
     {
-
+      
         $movements = $this->getCSV();
         foreach($movements as $movement){
           $this->add($movement);
