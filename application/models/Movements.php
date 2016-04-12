@@ -4,7 +4,7 @@ class Movements extends MY_Model2
 {
     function __construct()
     {
-        parent::__construct('movements', 'seq', 'Datetime');
+        parent::__construct('movements', 'Code', 'Datetime');
     }
 
     /**
@@ -15,7 +15,6 @@ class Movements extends MY_Model2
      */
     function displayMovements($code)
     {
-
         return $this->group($code);
     }
 
@@ -26,12 +25,6 @@ class Movements extends MY_Model2
      */
     function latestMovement()
     {
-      
-        $movements = $this->getCSV();
-        foreach($movements as $movement){
-          $this->add($movement);
-        }
-
         $this->db->select('Code');
         $this->db->from('movements');
         $this->db->order_by('Datetime', 'desc');
