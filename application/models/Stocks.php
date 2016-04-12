@@ -14,6 +14,10 @@ class Stocks extends MY_Model
      */
     function getAllStocks()
     {
+        $csvStocks = $this->getCsvStocks();
+        foreach($csvStocks as $csv){
+          $this->addCSV($csv);
+        }
         $stocks = $this->all();
 
         /* Add additional attributes to each Stock */
@@ -56,6 +60,7 @@ class Stocks extends MY_Model
     function getRecentStock()
     {
         $key = $this->movements->latestMovement();
+
         return $this->get($key);
     }
 
