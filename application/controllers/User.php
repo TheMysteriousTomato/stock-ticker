@@ -21,7 +21,7 @@ class User extends Application {
             if ( strcmp( $player[0]->password, sha1($pass) ) == 0 )
             {
                 // start session for player
-                $userdata = array('username' => $user, 'avatar' => $player[0]->avatar);
+                $userdata = array('username' => $user, 'avatar' => $player[0]->avatar, 'role' => $player[0]->role);
                 $this->session->set_userdata($userdata);
             }
 
@@ -61,7 +61,7 @@ class User extends Application {
             $this->players->add($player);
 
             // start session for player
-            $userdata = array('username' => $user, 'avatar' => $player->avatar);
+            $userdata = array('username' => $user, 'avatar' => $player->avatar, 'role' => $player->role);
             $this->session->set_userdata($userdata);
         }
 

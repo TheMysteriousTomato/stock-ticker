@@ -14,7 +14,8 @@ if (!defined('APPPATH'))
 <body>
 <div class="container">
     <div id="topstuff" class="row">
-        <p></p>
+            {menubar}
+
     </div>
     <div id="content">
         <h1>{title}</h1>
