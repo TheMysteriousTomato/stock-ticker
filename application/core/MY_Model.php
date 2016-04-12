@@ -181,10 +181,16 @@ class MY_Model extends CI_Model implements Active_Record {
         } else {
             $data = $record;
         }
-        // update the DB table appropriately
-        $key = $data[$this->_keyField];
-        $this->db->insert_id();
-        $object = $this->db->insert($this->_tableName, $data);
+        $this->db->where('seq',$data["seq"]);
+        $q = $this->db->get('movements');
+
+        if ( $q->num_rows() == 0 )  {
+          // update the DB table appropriately
+          $key = $data[$this->_keyField];
+          $this->db->set($data);
+          $this->db->insert_id();
+          $object = $this->db->insert($this->_tableName, $data);
+        }
     }
 
     // Retrieve an existing DB record as an object
@@ -233,6 +239,33 @@ class MY_Model extends CI_Model implements Active_Record {
         $this->db->order_by($this->_keyField, 'asc');
         $query = $this->db->get($this->_tableName);
         return $query->result();
+    }
+
+    function getCSV() {
+//        $this->db->order_by($this->_keyField, 'asc');
+//        $query = $this->db->get($this->_tableName);
+
+        $url="http://bsx.jlparry.com/data/movement";
+        $assocData = array();
+        $headerRecord = array();
+        if( ($handle = fopen( $url, "r")) !== FALSE) {
+            $rowCounter = 0;
+            while (($rowData = fgetcsv($handle, 0, ",")) !== FALSE) {
+                if( 0 === $rowCounter) {
+                    $headerRecord = $rowData;
+                } else {
+                    $c = new stdClass();
+                    foreach( $rowData as $key => $value) {
+                        $c->$headerRecord[$key] = $value;
+                    }
+                    $assocData[ $rowCounter - 1] = $c;
+                }
+                $rowCounter++;
+            }
+            fclose($handle);
+        }
+
+        return $assocData;
     }
 
     // Return all records as a result set
