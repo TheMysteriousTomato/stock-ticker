@@ -12,8 +12,8 @@ class Management extends Application {
 
         /* Set up data to render page */
         $this->data['title'] = "Management";
-        $this->data['left-panel-content'] = 'management/managements.php';
-        $this->data['right-panel-content'] = 'management/managements.php';
+        $this->data['left-panel-content'] = 'management/player-managements.php';
+        $this->data['right-panel-content'] = 'management/agent-managements.php';
 
         $this->render();
     }
