@@ -35,7 +35,6 @@ class Stocks extends MY_Model
                 $this->clearTable();
             }
         }
-
         $stocks = $this->all();
 
         /* Add additional attributes to each Stock */
@@ -77,6 +76,7 @@ class Stocks extends MY_Model
     function getRecentStock()
     {
         $key = $this->movements->latestMovement();
+
         return $this->get($key);
     }
 

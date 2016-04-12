@@ -188,10 +188,21 @@ class MY_Model extends CI_Model implements Active_Record
         } else {
             $data = $record;
         }
-        // update the DB table appropriately
-        $key = $data[$this->_keyField];
-        $this->db->insert_id();
-        $object = $this->db->insert($this->_tableName, $data);
+        //2016.02.01-09:01:56
+        $ts = $data["datetime"];
+        $date = new DateTime("@$ts");
+        $data['datetime'] = $date->format('Y.m.d-H:i:s');
+
+        $this->db->where('seq',$data["seq"]);
+        $q = $this->db->get('movements');
+
+        if ( $q->num_rows() == 0 )  {
+          // update the DB table appropriately
+          $key = $data[$this->_keyField];
+          $this->db->set($data);
+          $this->db->insert_id();
+          $object = $this->db->insert($this->_tableName, $data);
+        }
     }
 
     function addCSV($record)
@@ -290,23 +301,22 @@ class MY_Model extends CI_Model implements Active_Record
         }
         return $assocData;
     }
-
-    function getCsvStocks()
-    {
-        $url = "http://bsx.jlparry.com/data/stocks";
+    
+    function getCsvStocks() {
+        $url="http://bsx.jlparry.com/data/stocks";
         $assocData = array();
         $headerRecord = array();
-        if (($handle = fopen($url, "r")) !== FALSE) {
+        if( ($handle = fopen( $url, "r")) !== FALSE) {
             $rowCounter = 0;
             while (($rowData = fgetcsv($handle, 0, ",")) !== FALSE) {
-                if (0 === $rowCounter) {
+                if( 0 === $rowCounter) {
                     $headerRecord = $rowData;
                 } else {
                     $c = new stdClass();
-                    foreach ($rowData as $key => $value) {
+                    foreach( $rowData as $key => $value) {
                         $c->$headerRecord[$key] = $value;
                     }
-                    $assocData[$rowCounter - 1] = $c;
+                    $assocData[ $rowCounter - 1] = $c;
                 }
                 $rowCounter++;
             }
