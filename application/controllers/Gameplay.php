@@ -12,8 +12,8 @@ class Gameplay extends Application {
 
         /* Set up data to render page */
         $this->data['title'] = "Gameplay";
-        $this->data['left-panel-content'] = 'gameplay/gameplays.php';
-        $this->data['right-panel-content'] = 'gameplay/gameplays.php';
+        $this->data['left-panel-content'] = 'gameplay/status.php';
+        $this->data['right-panel-content'] = 'gameplay/actions.php';
 
         $this->render();
     }
