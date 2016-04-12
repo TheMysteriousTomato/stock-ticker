@@ -198,6 +198,26 @@ class MY_Model extends CI_Model implements Active_Record {
         }
     }
 
+    function addCSV($record) {
+        // convert object to associative array, if needed
+        if (is_object($record)) {
+            $data = get_object_vars($record);
+        } else {
+            $data = $record;
+        }
+
+        $this->db->where('Code', $data["code"]);
+        $q = $this->db->get("stocks");
+
+        if ( $q->num_rows() == 0 )  {
+          // update the DB table appropriately
+          $this->db->set($data);
+          $this->db->insert_id();
+          $object = $this->db->insert($this->_tableName, $data);
+        }
+
+    }
+
     // Retrieve an existing DB record as an object
     function get($key, $key2 = null) {
         $this->db->where($this->_keyField, $key);
@@ -272,6 +292,33 @@ class MY_Model extends CI_Model implements Active_Record {
 
         return $assocData;
     }
+    function getCsvStocks() {
+//        $this->db->order_by($this->_keyField, 'asc');
+//        $query = $this->db->get($this->_tableName);
+
+        $url="http://bsx.jlparry.com/data/stocks";
+        $assocData = array();
+        $headerRecord = array();
+        if( ($handle = fopen( $url, "r")) !== FALSE) {
+            $rowCounter = 0;
+            while (($rowData = fgetcsv($handle, 0, ",")) !== FALSE) {
+                if( 0 === $rowCounter) {
+                    $headerRecord = $rowData;
+                } else {
+                    $c = new stdClass();
+                    foreach( $rowData as $key => $value) {
+                        $c->$headerRecord[$key] = $value;
+                    }
+                    $assocData[ $rowCounter - 1] = $c;
+                }
+                $rowCounter++;
+            }
+            fclose($handle);
+        }
+
+        return $assocData;
+    }
+
 
     // Return all records as a result set
     function results() {

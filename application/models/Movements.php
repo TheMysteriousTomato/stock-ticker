@@ -31,6 +31,7 @@ class Movements extends MY_Model2
         foreach($movements as $movement){
           $this->add($movement);
         }
+
         $this->db->select('Code');
         $this->db->from('movements');
         $this->db->order_by('Datetime', 'desc');
