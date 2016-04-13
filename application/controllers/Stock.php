@@ -9,6 +9,7 @@ class Stock extends Application {
      */
     public function index()
     {
+        $this->getStatus();
         $stock     = $this->stocks->getRecentStock();
         $trans     = $this->stocks->getSalesTransactions($stock->Code);
         $stocks    = $this->stocks->getAllStocksForDisplay();
