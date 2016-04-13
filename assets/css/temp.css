@@ -32,6 +32,12 @@ select {
     font-family: Serif, serif;
     font-size: 1.5em;
     vertical-align: middle;
+    background: darkgray;
+    color: white !important;
+}
+
+.navbar-brand:hover {
+    background: gray !important;
 }
 
 /* Top of tables have a grey bar */
@@ -73,3 +79,11 @@ th {
     cursor: inherit;
     display: block;
 }
+
+
+/*.divider-vertical {*/
+    /*height: 40px;*/
+    /*margin: 0 9px;*/
+    /*border-left: 1px solid #5f5f5f;*/
+    /*border-right: 1px solid #5b5b5b;*/
+/*}*/

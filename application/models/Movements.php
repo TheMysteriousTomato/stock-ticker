@@ -15,8 +15,10 @@ class Movements extends MY_Model2
      */
     function displayMovements($code)
     {
-
-        return $this->group($code);
+//        var_dump($this);
+//        die();
+//        return $this->group($code);
+        return $this->movements->some('Code', $code);
     }
 
     /**
