@@ -235,6 +235,63 @@ class MY_Model extends CI_Model implements Active_Record {
         return $query->result();
     }
 
+    function getCSV() {
+        $url="http://bsx.jlparry.com/data/movement";
+        $assocData = array();
+        $headerRecord = array();
+        if( ($handle = fopen( $url, "r")) !== FALSE) {
+            $rowCounter = 0;
+            while (($rowData = fgetcsv($handle, 0, ",")) !== FALSE) {
+                if( 0 === $rowCounter) {
+                    $headerRecord = $rowData;
+                } else {
+                    $c = new stdClass();
+                    foreach( $rowData as $key => $value) {
+                        $c->$headerRecord[$key] = $value;
+                    }
+                    $assocData[ $rowCounter - 1] = $c;
+                }
+                $rowCounter++;
+            }
+            fclose($handle);
+        }
+        return $assocData;
+    }
+    function getCsvStocks() {
+        $url="http://bsx.jlparry.com/data/stocks";
+        $assocData = array();
+        $headerRecord = array();
+        if( ($handle = fopen( $url, "r")) !== FALSE) {
+            $rowCounter = 0;
+            while (($rowData = fgetcsv($handle, 0, ",")) !== FALSE) {
+                if( 0 === $rowCounter) {
+                    $headerRecord = $rowData;
+                } else {
+                    $c = new stdClass();
+                    foreach( $rowData as $key => $value) {
+                        $c->$headerRecord[$key] = $value;
+                    }
+                    $assocData[ $rowCounter - 1] = $c;
+                }
+                $rowCounter++;
+            }
+            fclose($handle);
+        }
+
+        return $assocData;
+    }
+
+    function getStatus(){
+      $url = "http://bsx.jlparry.com/status";
+      $xml = simplexml_load_file($url);
+      $status = get_object_vars($xml);
+      return $status;
+    }
+
+    function clearTable(){
+      $this->db->empty_table($this->_tableName);
+    }
+    
     // Return all records as a result set
     function results() {
         $this->db->order_by($this->_keyField, 'asc');
@@ -322,6 +379,8 @@ class MY_Model2 extends MY_Model {
             return false;
         return true;
     }
+
+
 
 //---------------------------------------------------------------------------
 //  Composite functions
