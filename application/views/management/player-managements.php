@@ -68,8 +68,16 @@
 
         checkboxes.on('switchChange.bootstrapSwitch', function(event, state) {
             var id = $(this).attr("data-id");
-
-            alert("changing to " + state + " for id:" + id);
+            var role = (state) ? "admin" : "player";
+            $.ajax({
+                url: '/player/set_role/' + id + '/' + role,
+                type: 'PUT',
+                success: function(result) {
+                    // Do something with the result
+                    console.log("Player Successfully Updated");
+                    window.location.reload();
+                }
+            });
         });
 
     });

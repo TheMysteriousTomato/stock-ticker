@@ -82,6 +82,12 @@ class Player extends Application {
         echo json_encode($transactions);
     }
 
+    public function set_role($id, $role) {
+        $player = $this->players->get($id);
+        $player->role = $role;
+        $this->players->update($player);
+    }
+
     public function delete($id) {
         $this->players->delete($id);
         return "true";
