@@ -1,12 +1,12 @@
 <h2 class="text-center underline">Status</h2>
 
-<h3>Portfolio - PlayerName</h3>
+<h3>Portfolio - {PlayerName}</h3>
 <dl>
     <dt>Cash</dt>
-    <dd></dd>
+    <dd>{Cash}</dd>
 
     <dt>Equity</dt>
-    <dd></dd>
+    <dd>{Equity}</dd>
 
     <dt>Market Status</dt>
     <dd></dd>

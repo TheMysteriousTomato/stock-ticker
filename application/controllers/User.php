@@ -12,6 +12,8 @@ class User extends Application {
         $pass  = $this->input->post('password');
         $img   = $this->input->post('avatar');
 
+        $this->data = array();
+
         $player = $this->players->some('Player', $user);
 
         // If player exists
@@ -23,6 +25,8 @@ class User extends Application {
                 // start session for player
                 $userdata = array('username' => $user, 'avatar' => $player[0]->avatar, 'role' => $player[0]->role);
                 $this->session->set_userdata($userdata);
+
+                redirect(base_url());
             }
 
         }
@@ -39,33 +43,36 @@ class User extends Application {
             $player->role = ROLE_PLAYER;
             $player->Cash = 1000;
 
-            if (!($img)) {
-                $config['upload_path'] = './uploads/';
-                $config['allowed_types'] = 'gif|jpg|png';
-                $config['file_name'] = $user;
+            if(!empty($user) && !empty($pass))
+            {
+                if (!($img)) {
+                    $config['upload_path'] = './uploads/';
+                    $config['allowed_types'] = 'gif|jpg|png';
+                    $config['file_name'] = $user;
 
-                $this->load->library('upload', $config);
+                    $this->load->library('upload', $config);
 
-                if(!$this->upload->do_upload("avatar")) {
-                    $error = $this->upload->display_errors();
-                    var_dump($error);
-                    die();
-                }
-                else {
-                    $filedata = $this->upload->data();
-                    $player->avatar = '/uploads/' . $filedata['file_name'];
+                    if (!$this->upload->do_upload("avatar")) {
+                        $this->data['error'] = $this->upload->display_errors('<p>', '</p>');
+//                        var_dump($this->upload->display_errors());
+                    } else {
+                        $filedata = $this->upload->data();
+                        $player->avatar = '/uploads/' . $filedata['file_name'];
+
+                        // add user to db
+                        $this->players->add($player);
+
+                        // start session for player
+                        $userdata = array('username' => $user, 'avatar' => $player->avatar, 'role' => $player->role);
+                        $this->session->set_userdata($userdata);
+
+                        redirect(base_url());
+                    }
                 }
             }
-
-            // add user to db
-            $this->players->add($player);
-
-            // start session for player
-            $userdata = array('username' => $user, 'avatar' => $player->avatar, 'role' => $player->role);
-            $this->session->set_userdata($userdata);
         }
-
-        redirect(base_url());
+        $this->data['data'] = &$this->data;
+        $this->parser->parse('/errors/custom-error', $this->data);
     }
 
     /**
