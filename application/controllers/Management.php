@@ -9,8 +9,12 @@ class Management extends Application {
      */
     public function index()
     {
-        $players = $this->players->getAllPlayers();
         $player  = $this->session->userdata('username');
+
+        if(is_null($player))
+            redirect(base_url());
+
+        $players = $this->players->getAllPlayers();
         $playerz = $this->players->some('Player', $player);
         $player = $playerz[0];
 
