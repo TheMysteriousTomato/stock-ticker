@@ -13,6 +13,8 @@ class Homepage extends Application {
         $this->data['stocks']          = $this->stocks->getAllStocks();
         $this->data['players']         = $this->players->getAllPlayers();
         $this->data['latestmovements'] = $this->movements->latest5Movements();
+
+        /* Grab game status */
         $status = $this->managements->getServerStatus();
 
         /* Set up data to render page */
