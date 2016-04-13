@@ -10,8 +10,10 @@ class Homepage extends Application {
     public function index()
     {
         /* Grab data from database for Stocks and Players */
-        $this->data['stocks'] = $this->stocks->getAllStocks();
-        $this->data['players'] = $this->players->getAllPlayers();
+        $this->data['stocks']          = $this->stocks->getAllStocks();
+        $this->data['players']         = $this->players->getAllPlayers();
+        $this->data['latestmovements'] = $this->movements->latest5Movements();
+        $status = $this->managements->getServerStatus();
 
         /* Set up data to render page */
         $this->data['title'] = "Stock Ticker";

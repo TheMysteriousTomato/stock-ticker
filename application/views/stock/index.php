@@ -7,8 +7,7 @@
 {form}
 {select}
 
-<div id="stock_code" class="hidden-xs hidden-sm hidden-md hidden-lg">{stock_code}</div>
-<div id="stock_code" class="hidden-xs hidden-sm hidden-md hidden-lg">{url}</div>
+<div id="stock_code" class="hide">{stock_code}</div>
 
 <!-- Graph Container -->
 <div id="temp-stocks"></div>

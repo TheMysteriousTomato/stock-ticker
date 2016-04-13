@@ -26,15 +26,15 @@ class Application extends CI_Controller {
         $this->data['date']  = date('l\, F jS Y');
         $this->errors        = array();
 
-        $players_link = '<button type="button" class="btn btn-info">Players</button>';
-        $stocks_link = '<button type="button" class="btn btn-info">Stocks</button>';
-        $gameplays_link = '<button type="button" class="btn btn-info">Gameplay</button>';
-        $managements_link = '<button type="button" class="btn btn-info">Management</button>';
-
-        $this->data['stocks_link'] = anchor('stock', $stocks_link, 'title="List of All the Stocks"');
-        $this->data['players_link'] = anchor('player', $players_link, 'title="List of All the Players"');
-        $this->data['gameplays_link'] = anchor('gameplay', $gameplays_link, 'title="Gameplay"');
-        $this->data['managements_link'] = anchor('management', $managements_link, 'title="Management"');
+//        $players_link = '<button type="button" class="btn btn-info">Players</button>';
+//        $stocks_link = '<button type="button" class="btn btn-info">Stocks</button>';
+//        $gameplays_link = '<button type="button" class="btn btn-info">Gameplay</button>';
+//        $managements_link = '<button type="button" class="btn btn-info">Management</button>';
+//
+//        $this->data['stocks_link'] = anchor('stock', $stocks_link, 'title="List of All the Stocks"');
+//        $this->data['players_link'] = anchor('player', $players_link, 'title="List of All the Players"');
+//        $this->data['gameplays_link'] = anchor('gameplay', $gameplays_link, 'title="Gameplay"');
+//        $this->data['managements_link'] = anchor('management', $managements_link, 'title="Management"');
 
     }
 
