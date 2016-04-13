@@ -11,18 +11,3 @@
     <dt>Status</dt>
     <dd></dd>
 </dl>
-
-<script>
-    $(document).ready(function() {
-        var refreshGameState = function() {
-            $.ajax({
-                method: 'get',
-                url: 'two',
-                success: function(data) {
-                    console.log(data);
-                }
-            });
-        };
-        setInterval(refreshGameState, 2000);
-    });
-</script>

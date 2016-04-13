@@ -6,11 +6,12 @@ if (!defined('BASEPATH'))
 /**
  * Generic data access abstraction.
  *
- * @author		JLP
+ * @author        JLP
  * @copyright           Copyright (c) 2010-2015, James L. Parry
  * ------------------------------------------------------------------------
  */
-interface Active_record {
+interface Active_record
+{
 //---------------------------------------------------------------------------
 //  Utility methods
 //---------------------------------------------------------------------------
@@ -99,8 +100,8 @@ interface Active_record {
     /**
      * Retrieve some of the DB records, namely those for which the
      * value of the field $what matches $which.
-     * @param string    $what   Name of the field being matched.
-     * @param   mixed   $which  Value sought.
+     * @param string $what Name of the field being matched.
+     * @param   mixed $which Value sought.
      * @return mixed The selected records, as an array of records
      */
     function some($what, $which);
@@ -109,11 +110,12 @@ interface Active_record {
 /**
  * Generic data access model, for an RDB.
  *
- * @author		JLP
+ * @author        JLP
  * @copyright           Copyright (c) 2010-2014, James L. Parry
  * ------------------------------------------------------------------------
  */
-class MY_Model extends CI_Model implements Active_Record {
+class MY_Model extends CI_Model implements Active_Record
+{
 
     protected $_tableName;            // Which table is this a model for?
     protected $_keyField;             // name of the primary key field
@@ -125,9 +127,10 @@ class MY_Model extends CI_Model implements Active_Record {
     /**
      * Constructor.
      * @param string $tablename Name of the RDB table
-     * @param string $keyfield  Name of the primary key field
+     * @param string $keyfield Name of the primary key field
      */
-    function __construct($tablename = null, $keyfield = 'id') {
+    function __construct($tablename = null, $keyfield = 'id')
+    {
         parent::__construct();
 
         if ($tablename == null)
@@ -146,7 +149,8 @@ class MY_Model extends CI_Model implements Active_Record {
      * Return the number of records in this table.
      * @return int The number of records in this table
      */
-    function size() {
+    function size()
+    {
         $query = $this->db->get($this->_tableName);
         return $query->num_rows();
     }
@@ -155,7 +159,8 @@ class MY_Model extends CI_Model implements Active_Record {
      * Return the field names in this table, from the table metadata.
      * @return array(string) The field names in this table
      */
-    function fields() {
+    function fields()
+    {
         return $this->db->list_fields($this->_tableName);
     }
 
@@ -165,7 +170,8 @@ class MY_Model extends CI_Model implements Active_Record {
     // Create a new data object.
     // Only use this method if intending to create an empty record and then
     // populate it.
-    function create() {
+    function create()
+    {
         $names = $this->db->list_fields($this->_tableName);
         $object = new StdClass;
         foreach ($names as $name)
@@ -174,7 +180,8 @@ class MY_Model extends CI_Model implements Active_Record {
     }
 
     // Add a record to the DB
-    function add($record) {
+    function add($record)
+    {
         // convert object to associative array, if needed
         if (is_object($record)) {
             $data = get_object_vars($record);
@@ -190,8 +197,7 @@ class MY_Model extends CI_Model implements Active_Record {
     function addCSV($record)
     {
         // convert object to associative array, if needed
-        if (is_object($record))
-        {
+        if (is_object($record)) {
             $data = get_object_vars($record);
         } else {
             $data = $record;
@@ -200,8 +206,7 @@ class MY_Model extends CI_Model implements Active_Record {
         $this->db->where('Code', $data["code"]);
         $q = $this->db->get("stocks");
 
-        if($q->num_rows() == 0)
-        {
+        if ($q->num_rows() == 0) {
             // update the DB appropriately
             $this->db->set($data);
             $this->db->insert_id();
@@ -210,7 +215,8 @@ class MY_Model extends CI_Model implements Active_Record {
     }
 
     // Retrieve an existing DB record as an object
-    function get($key, $key2 = null) {
+    function get($key, $key2 = null)
+    {
         $this->db->where($this->_keyField, $key);
         $query = $this->db->get($this->_tableName);
         if ($query->num_rows() < 1)
@@ -219,7 +225,8 @@ class MY_Model extends CI_Model implements Active_Record {
     }
 
     // Update a record in the DB
-    function update($record) {
+    function update($record)
+    {
         // convert object to associative array, if needed
         if (is_object($record)) {
             $data = get_object_vars($record);
@@ -233,13 +240,15 @@ class MY_Model extends CI_Model implements Active_Record {
     }
 
     // Delete a record from the DB
-    function delete($key, $key2 = null) {
+    function delete($key, $key2 = null)
+    {
         $this->db->where($this->_keyField, $key);
         $object = $this->db->delete($this->_tableName);
     }
 
     // Determine if a key exists
-    function exists($key, $key2 = null) {
+    function exists($key, $key2 = null)
+    {
         $this->db->where($this->_keyField, $key);
         $query = $this->db->get($this->_tableName);
         if ($query->num_rows() < 1)
@@ -251,27 +260,29 @@ class MY_Model extends CI_Model implements Active_Record {
 //  Aggregate methods
 //---------------------------------------------------------------------------
     // Return all records as an array of objects
-    function all() {
+    function all()
+    {
         $this->db->order_by($this->_keyField, 'asc');
         $query = $this->db->get($this->_tableName);
         return $query->result();
     }
 
-    function getCSV() {
-        $url="http://bsx.jlparry.com/data/movement";
+    function getCSV()
+    {
+        $url = "http://bsx.jlparry.com/data/movement";
         $assocData = array();
         $headerRecord = array();
-        if( ($handle = fopen( $url, "r")) !== FALSE) {
+        if (($handle = fopen($url, "r")) !== FALSE) {
             $rowCounter = 0;
             while (($rowData = fgetcsv($handle, 0, ",")) !== FALSE) {
-                if( 0 === $rowCounter) {
+                if (0 === $rowCounter) {
                     $headerRecord = $rowData;
                 } else {
                     $c = new stdClass();
-                    foreach( $rowData as $key => $value) {
+                    foreach ($rowData as $key => $value) {
                         $c->$headerRecord[$key] = $value;
                     }
-                    $assocData[ $rowCounter - 1] = $c;
+                    $assocData[$rowCounter - 1] = $c;
                 }
                 $rowCounter++;
             }
@@ -279,21 +290,23 @@ class MY_Model extends CI_Model implements Active_Record {
         }
         return $assocData;
     }
-    function getCsvStocks() {
-        $url="http://bsx.jlparry.com/data/stocks";
+
+    function getCsvStocks()
+    {
+        $url = "http://bsx.jlparry.com/data/stocks";
         $assocData = array();
         $headerRecord = array();
-        if( ($handle = fopen( $url, "r")) !== FALSE) {
+        if (($handle = fopen($url, "r")) !== FALSE) {
             $rowCounter = 0;
             while (($rowData = fgetcsv($handle, 0, ",")) !== FALSE) {
-                if( 0 === $rowCounter) {
+                if (0 === $rowCounter) {
                     $headerRecord = $rowData;
                 } else {
                     $c = new stdClass();
-                    foreach( $rowData as $key => $value) {
+                    foreach ($rowData as $key => $value) {
                         $c->$headerRecord[$key] = $value;
                     }
-                    $assocData[ $rowCounter - 1] = $c;
+                    $assocData[$rowCounter - 1] = $c;
                 }
                 $rowCounter++;
             }
@@ -303,26 +316,51 @@ class MY_Model extends CI_Model implements Active_Record {
         return $assocData;
     }
 
-    function getStatus(){
-      $url = "http://bsx.jlparry.com/status";
-      $xml = simplexml_load_file($url);
-      $status = get_object_vars($xml);
-      return $status;
+    function getStatus()
+    {
+        // Game Status
+        $gamestatus_url = 'http://bsx.jlparry.com/status';
+        $curl = curl_init();
+        curl_setopt($curl, CURLOPT_HEADER, 1);
+        curl_setopt($curl, CURLOPT_TIMEOUT, 5);
+        curl_setopt($curl, CURLOPT_CONNECTTIMEOUT, 5);
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($curl, CURLOPT_URL, $gamestatus_url);
+
+        $response = curl_exec($curl);
+        $content_type = curl_getinfo($curl, CURLINFO_CONTENT_TYPE);
+
+        curl_close($curl);
+
+        if(strcmp($content_type, "text/xml; charset=UTF-8") == 0) {
+            $headers = "";
+            $content = "";
+            list($headers, $content) = explode("\r\n\r\n", $response);
+
+            $gamestatus_xml = simplexml_load_string($content);
+
+            return get_object_vars($gamestatus_xml);
+        }
+
+        return null;
     }
 
-    function clearTable(){
-      $this->db->empty_table($this->_tableName);
+    function clearTable()
+    {
+        $this->db->empty_table($this->_tableName);
     }
 
     // Return all records as a result set
-    function results() {
+    function results()
+    {
         $this->db->order_by($this->_keyField, 'asc');
         $query = $this->db->get($this->_tableName);
         return $query;
     }
 
     // Return filtered records as an array of records
-    function some($what, $which) {
+    function some($what, $which)
+    {
         $this->db->order_by($this->_keyField, 'asc');
         if (($what == 'period') && ($which < 9)) {
             $this->db->where($what, $which); // special treatment for period
@@ -333,7 +371,8 @@ class MY_Model extends CI_Model implements Active_Record {
     }
 
     // Determine the highest key used
-    function highest() {
+    function highest()
+    {
         $this->db->select_max($this->_keyField);
         $query = $this->db->get($this->_tableName);
         $result = $query->result();
@@ -345,13 +384,15 @@ class MY_Model extends CI_Model implements Active_Record {
 
 }
 
-class MY_Model2 extends MY_Model {
+class MY_Model2 extends MY_Model
+{
 
     protected $_keyField2;                 // second part of composite primary key
 
     // Constructor
 
-    function __construct($tablename = null, $keyfield = 'id', $keyfield2 = 'part') {
+    function __construct($tablename = null, $keyfield = 'id', $keyfield2 = 'part')
+    {
         parent::__construct($tablename, $keyfield);
         $this->_keyField2 = $keyfield2;
     }
@@ -360,7 +401,8 @@ class MY_Model2 extends MY_Model {
 //  Record-oriented functions
 //---------------------------------------------------------------------------
     // Retrieve an existing DB record as an object
-    function get($key1, $key2) {
+    function get($key1, $key2)
+    {
         $this->db->where($this->_keyField, $key1);
         $this->db->where($this->_keyField2, $key2);
         $query = $this->db->get($this->_tableName);
@@ -370,7 +412,8 @@ class MY_Model2 extends MY_Model {
     }
 
     // Update a record in the DB
-    function update($record) {
+    function update($record)
+    {
         // convert object to associative array, if needed
         if (is_object($record)) {
             $data = get_object_vars($record);
@@ -386,14 +429,16 @@ class MY_Model2 extends MY_Model {
     }
 
     // Delete a record from the DB
-    function delete($key1, $key2) {
+    function delete($key1, $key2)
+    {
         $this->db->where($this->_keyField, $key1);
         $this->db->where($this->_keyField2, $key2);
         $object = $this->db->delete($this->_tableName);
     }
 
     // Determine if a key exists
-    function exists($key1, $key2) {
+    function exists($key1, $key2)
+    {
         $this->db->where($this->_keyField, $key1);
         $this->db->where($this->_keyField2, $key2);
         $query = $this->db->get($this->_tableName);
@@ -408,7 +453,8 @@ class MY_Model2 extends MY_Model {
 //  Composite functions
 //---------------------------------------------------------------------------
     // Return all records associated with a member
-    function group($key) {
+    function group($key)
+    {
         $this->db->where($this->_keyField, $key);
         $this->db->order_by($this->_keyField, 'asc');
         $this->db->order_by($this->_keyField2, 'asc');
@@ -417,13 +463,15 @@ class MY_Model2 extends MY_Model {
     }
 
     // Delete all records associated with a member
-    function delete_some($key) {
+    function delete_some($key)
+    {
         $this->db->where($this->_keyField, $key);
         $object = $this->db->delete($this->_tableName);
     }
 
     // Determine the highest secondary key associated with a primary
-    function highest_some($key) {
+    function highest_some($key)
+    {
         $this->db->where($this->_keyField, $key);
         $query = $this->db->get($this->_tableName);
         $highest = -1;
@@ -439,7 +487,8 @@ class MY_Model2 extends MY_Model {
 //  Aggregate functions
 //---------------------------------------------------------------------------
     // Return all records as an array of objects
-    function all($primary = null) {
+    function all($primary = null)
+    {
         $this->db->order_by($this->_keyField, 'asc');
         $this->db->order_by($this->_keyField2, 'asc');
         $query = $this->db->get($this->_tableName);

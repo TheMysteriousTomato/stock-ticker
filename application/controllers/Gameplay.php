@@ -34,22 +34,6 @@ class Gameplay extends Application {
         $this->render();
     }
 
-    public function two()
-    {
-        // Game Status
-        $gamestatus_url = 'http://bsx.jlparry.com/status';
-        $curl = curl_init();
-        curl_setopt($curl, CURLOPT_HEADER, 0);
-        curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($curl, CURLOPT_URL, $gamestatus_url);
-
-        $response = curl_exec($curl);
-
-        $gamestatus_xml = simplexml_load_string($response);
-
-        return $gamestatus_xml;
-    }
-
     public function buystock()
     {
         // POST: /buy

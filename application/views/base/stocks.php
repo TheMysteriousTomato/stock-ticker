@@ -42,6 +42,3 @@
 
     </tbody>
 </table>
-{status}
-{round}
-{/status}
