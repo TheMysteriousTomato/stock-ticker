@@ -76,13 +76,12 @@ class Application extends CI_Controller {
         $choices[] = array('name' => "Stock", 'link' => '/stock');
         $choices[] = array('name' => "Player", 'link' => '/player');
 
-        if(strcmp($userRole, ROLE_PLAYER) == 0)
+        if(!(empty($this->session->userdata('username'))))
         {
-            $choices[] = array('name' => "Gameplay", 'link' => '/gameplay');
-        }
-        if(strcmp($userRole, ROLE_ADMIN) == 0)
-        {
-            $choices[] = array('name' => "Management", 'link' => '/management');
+            if (strcmp($userRole, ROLE_PLAYER) == 0)
+                $choices[] = array('name' => "Gameplay", 'link' => '/gameplay');
+            if (strcmp($userRole, ROLE_ADMIN) == 0)
+                $choices[] = array('name' => "Management", 'link' => '/management');
         }
         return $choices;
 
