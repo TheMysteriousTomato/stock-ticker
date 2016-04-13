@@ -14,10 +14,15 @@ class Gameplay extends Application {
         $player = $this->players->some('Player', $playername);
 
         if(!(empty($player))) {
+            // Portfolio
             $player = $player[0];
             $this->data['PlayerName'] = $playername;
             $this->data['Cash'] = $player->Cash;
             $this->data['Equity'] = $this->players->getEquity($playername);
+
+            // Stocks
+            $this->data['Stocks'] = $this->stocks->getAllStocks();
+
         }
         else {
            // TODO: If not logged in display error page??
@@ -27,7 +32,6 @@ class Gameplay extends Application {
         $this->data['title'] = "Gameplay";
         $this->data['left-panel-content'] = 'gameplay/status.php';
         $this->data['right-panel-content'] = 'gameplay/actions.php';
-
         $this->render();
     }
 }

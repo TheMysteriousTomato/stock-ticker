@@ -3,9 +3,9 @@
     <div class="form-group">
         <label for="stock">Stocks:</label>
         <select id="stock" name="stock" class="form-control">
-            <option>STOCK#1</option>
-            <option>STOCK#2</option>
-            <option>STOCK#3</option>
+            {Stocks}
+                <option value="{Code}">{Name}</option>
+            {/Stocks}
         </select>
     </div>
 
