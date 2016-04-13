@@ -14,14 +14,14 @@ class Stocks extends MY_Model
      */
     function getAllStocks()
     {
-      
+      /*
         $this->clearTable();
         $csvStocks = $this->getCsvStocks();
           $this->clearTable();
           foreach($csvStocks as $csv){
             $this->addCSV($csv);
           }
-
+      */
         $stocks = $this->all();
 
         /* Add additional attributes to each Stock */
