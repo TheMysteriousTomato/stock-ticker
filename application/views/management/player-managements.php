@@ -75,7 +75,15 @@
     });
 
     function del(id) {
-        alert("delete " + id);
+        $.ajax({
+            url: '/player/delete/' + id,
+            type: 'DELETE',
+            success: function(result) {
+                // Do something with the result
+                console.log("Player Successfully Deleted");
+                window.location.reload();
+            }
+        });
     }
 </script>
 

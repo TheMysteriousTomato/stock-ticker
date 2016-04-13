@@ -81,4 +81,9 @@ class Player extends Application {
         $this->output->set_header('Content-Type: application/json; charset=utf-8');
         echo json_encode($transactions);
     }
+
+    public function delete($id) {
+        $this->players->delete($id);
+        return "true";
+    }
 }
