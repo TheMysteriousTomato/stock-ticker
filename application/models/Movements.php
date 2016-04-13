@@ -28,6 +28,7 @@ class Movements extends MY_Model2
     {
 
         $movements = $this->getCSV();
+        $this->clearTable();
         foreach($movements as $movement){
           $this->add($movement);
         }
