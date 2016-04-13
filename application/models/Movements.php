@@ -51,7 +51,6 @@ class Movements extends MY_Model2
         $query = $this->db->get();
 
         $result = $query->result_array();
-        print_r($result);
         return $result;
     }
 

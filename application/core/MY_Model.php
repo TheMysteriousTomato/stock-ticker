@@ -187,6 +187,28 @@ class MY_Model extends CI_Model implements Active_Record {
         $object = $this->db->insert($this->_tableName, $data);
     }
 
+    function addCSV($record)
+    {
+        // convert object to associative array, if needed
+        if (is_object($record))
+        {
+            $data = get_object_vars($record);
+        } else {
+            $data = $record;
+        }
+
+        $this->db->where('Code', $data["code"]);
+        $q = $this->db->get("stocks");
+
+        if($q->num_rows() == 0)
+        {
+            // update the DB appropriately
+            $this->db->set($data);
+            $this->db->insert_id();
+            $object = $this->db->insert($this->_tableName, $data);
+        }
+    }
+
     // Retrieve an existing DB record as an object
     function get($key, $key2 = null) {
         $this->db->where($this->_keyField, $key);
@@ -291,7 +313,7 @@ class MY_Model extends CI_Model implements Active_Record {
     function clearTable(){
       $this->db->empty_table($this->_tableName);
     }
-    
+
     // Return all records as a result set
     function results() {
         $this->db->order_by($this->_keyField, 'asc');
