@@ -15,7 +15,6 @@ class Homepage extends Application {
         $this->data['latestmovements'] = $this->movements->latest5Movements();
         $status = $this->managements->getServerStatus();
         $this->data['status']          = array($status);
-        print_r($status);
         /* Set up data to render page */
         $this->data['title'] = "Stock Ticker";
         $this->data['left-panel-content'] = 'base/players.php';

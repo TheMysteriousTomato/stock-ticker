@@ -17,7 +17,7 @@ class Stocks extends MY_Model
         $status = $this->getStatus();
         $state = $status["state"];
 
-        if(strcmp($state, "2") || strcmp($state, "3"))
+        if(strcmp($state, "2") == 0 || strcmp($state, "3") == 0)
         {
             $this->clearTable();
             $csvStocks = $this->getCsvStocks();
@@ -26,6 +26,11 @@ class Stocks extends MY_Model
             {
                 $this->addCSV($csv);
             }
+        }
+
+        if(strcmp($state, "0") == 0 || strcmp($state, "1") == 0 || strcmp($state, "4") == 0)
+        {
+            $this->clearTable();
         }
 
         $stocks = $this->all();
