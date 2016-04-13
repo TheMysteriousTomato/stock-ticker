@@ -9,6 +9,9 @@ class Stock extends Application {
      */
     public function index()
     {
+        if(empty($this->stocks->all()))
+            redirect(base_url());
+        
         $stock     = $this->stocks->getRecentStock();
         $trans     = $this->stocks->getSalesTransactions($stock->Code);
         $stocks    = $this->stocks->getAllStocksForDisplay();
