@@ -7,4 +7,10 @@ class Managements extends MY_Model
         parent::__construct('managements', 'id');
     }
 
+    function getServerStatus()
+    {
+        $status = $this->getStatus();
+        return $status;
+    }
+
 }

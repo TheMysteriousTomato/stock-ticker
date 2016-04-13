@@ -41,7 +41,7 @@ class User extends Application {
             $player->Player = $user;
             $player->password = $new_pass;
             $player->role = ROLE_PLAYER;
-            $player->Cash = 1000;
+            $player->Cash = 5000;
 
             if(!empty($user) && !empty($pass))
             {

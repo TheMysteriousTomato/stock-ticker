@@ -1,43 +1,11 @@
-# noinspection SqlNoDataSourceInspectionForFile
--- phpMyAdmin SQL Dump
--- version 4.4.14.1
--- http://www.phpmyadmin.net
---
--- Host: localhost
--- Generation Time: Feb 03, 2016 at 06:51 PM
--- Server version: 5.6.26
--- PHP Version: 5.6.12
-
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET time_zone = "+00:00";
-
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
-
---
--- Database: `stockticker`
---
-
--- --------------------------------------------------------
-
---
--- Table structure for table `movements`
---
-
 DROP TABLE IF EXISTS `movements`;
 CREATE TABLE IF NOT EXISTS `movements` (
-  `Datetime` varchar(19) DEFAULT NULL,
-  `Code` varchar(4) DEFAULT NULL,
-  `Action` varchar(4) DEFAULT NULL,
-  `Amount` int(2) DEFAULT NULL
+  `Seq` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  `Datetime` varchar(19) NOT NULL,
+  `Code` varchar(11) NOT NULL,
+  `Action` varchar(4) NOT NULL,
+  `Amount` int(2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `movements`
---
 
 INSERT INTO `movements` (`Datetime`, `Code`, `Action`, `Amount`) VALUES
 ('2016.02.01-09:01:00', 'BOND', 'down', 5),
@@ -70,12 +38,6 @@ INSERT INTO `movements` (`Datetime`, `Code`, `Action`, `Amount`) VALUES
 ('2016.02.01-09:01:54', 'IND', 'down', 10),
 ('2016.02.01-09:01:56', 'GOLD', 'div', 20);
 
--- --------------------------------------------------------
-
---
--- Table structure for table `players`
---
-
 DROP TABLE IF EXISTS `players`;
 
 CREATE TABLE IF NOT EXISTS `players` (
@@ -99,33 +61,19 @@ CREATE TABLE IF NOT EXISTS `ci_sessions` (
   KEY `ci_sessions_timestamp` (`timestamp`)
 );
 
---
--- Dumping data for table `players`
---
-
-INSERT INTO `players` (`Player`, `Cash`) VALUES
-('Mickey', 1000),
-('Donald', 3000),
-('George', 2000),
-('Henry', 2500);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `stocks`
---
+INSERT INTO `players` (`Player`, `password`, `role`, `avatar`, `Cash`) VALUES
+('Mickey', '9d4e1e23bd5b727046a9e3b4b7db57bd8d6ee684', 'player', '/uploads/zephyr5.png', 5000),
+('Donald', '9d4e1e23bd5b727046a9e3b4b7db57bd8d6ee684', 'admin', '/uploads/admin.jpg', 10000),
+('George', '9d4e1e23bd5b727046a9e3b4b7db57bd8d6ee684', 'player', '/uploads/Ven_Lucifer_av_1.png', 5000),
+('Henry', '9d4e1e23bd5b727046a9e3b4b7db57bd8d6ee684', 'player', '/uploads/group1.png', 6500);
 
 DROP TABLE IF EXISTS `stocks`;
 CREATE TABLE IF NOT EXISTS `stocks` (
-  `Code` varchar(4) DEFAULT NULL,
-  `Name` varchar(10) DEFAULT NULL,
+  `Code` varchar(4) NOT NULL PRIMARY KEY,
+  `Name` varchar(255) DEFAULT NULL,
   `Category` varchar(1) DEFAULT NULL,
   `Value` int(3) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `stocks`
---
 
 INSERT INTO `stocks` (`Code`, `Name`, `Category`, `Value`) VALUES
 ('BOND', 'Bonds', 'B', 66),
@@ -135,24 +83,15 @@ INSERT INTO `stocks` (`Code`, `Name`, `Category`, `Value`) VALUES
 ('OIL', 'Oil', 'B', 52),
 ('TECH', 'Tech', 'B', 37);
 
--- --------------------------------------------------------
-
---
--- Table structure for table `transactions`
---
-
 DROP TABLE IF EXISTS `transactions`;
 CREATE TABLE IF NOT EXISTS `transactions` (
+  `Seq` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
   `DateTime` varchar(19) DEFAULT NULL,
   `Player` varchar(6) DEFAULT NULL,
   `Stock` varchar(4) DEFAULT NULL,
   `Trans` varchar(4) DEFAULT NULL,
   `Quantity` int(4) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `transactions`
---
 
 INSERT INTO `transactions` (`DateTime`, `Player`, `Stock`, `Trans`, `Quantity`) VALUES
 ('2016.02.01-09:01:00', 'Donald', 'BOND', 'buy', 100),
@@ -169,6 +108,22 @@ INSERT INTO `transactions` (`DateTime`, `Player`, `Stock`, `Trans`, `Quantity`) 
 ('2016.02.01-09:01:55', 'George', 'OIL', 'buy', 100),
 ('2016.02.01-09:01:60', 'George', 'IND', 'buy', 100);
 
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+DROP TABLE IF EXISTS `certificates`;
+CREATE TABLE IF NOT EXISTS `certificates` (
+  `token` varchar(8) NOT NULL,
+  `stock` varchar(4) NOT NULL,
+  `player` varchar(64) NOT NULL,
+  `amount` int(11) NOT NULL,
+  `datetime` varchar(19) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+INSERT INTO `certificates` (`token`, `stock`, `player`, `amount`, `datetime`) VALUES
+('0', 'GOLD', 'Donald', 10, '2016.02.29-09:01:00'),
+('17b5c', 'GOLD', 'Donald', 10, '2016.02.29-09:01:00'),
+('1cff5', 'GOLD', 'Donald', 10, '2016.02.29-09:01:00'),
+('37f5c', 'GOLD', 'Donald', 10, '2016.02.29-09:01:00'),
+('83651', 'GOLD', 'Donald', 10, '2016.02.29-09:01:00'),
+('96cab', 'GOLD', 'Donald', 10, '2016.02.29-09:01:00'),
+('ABCD1234', 'GOLD', 'Mickey', 100, '2016.02.29-09:01:00'),
+('d16d4', 'GOLD', 'Donald', 1000, '2016.02.29-09:01:00');
+
