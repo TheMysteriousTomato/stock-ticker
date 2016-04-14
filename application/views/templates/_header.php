@@ -17,9 +17,8 @@
                
                
                 <ul class="nav navbar-nav">
+                    <li data-toggle="modal" data-target="#status-modal"><a href="javascript:void(0)">Status</a></li>
                     {menubar}
-
-                    
                 </ul>
 
                 <div class="nav navbar-nav navbar-right">

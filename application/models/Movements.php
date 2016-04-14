@@ -44,7 +44,20 @@ class Movements extends MY_Model2
         $query = $this->db->get();
 
         $result = $query->result_array();
-        return $result[0]["Code"];
+
+        if (!empty($result))
+            return $result[0]["Code"];
+        else
+        {
+            $this->db->select('Code');
+            $this->db->from('stocks');
+            $this->db->limit(1);
+            $query = $this->db->get();
+
+            $result = $query->result_array();
+
+            return $result[0]["Code"];
+        }
     }
 
     function latest5Movements()
