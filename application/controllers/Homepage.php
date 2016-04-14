@@ -15,14 +15,19 @@ class Homepage extends Application {
         $this->data['latestmovements']    = $this->movements->latest5Movements();
         $this->data['latesttransactions'] = $this->transactions->latest5transactions();
 
-        /* Grab game status */
-        $status = $this->managements->getServerStatus();
-
         /* Set up data to render page */
         $this->data['title'] = "Stock Ticker";
         $this->data['left-panel-content'] = 'base/players.php';
         $this->data['right-panel-content'] = 'base/stocks.php';
 
         $this->render();
+    }
+
+    public function status()
+    {
+        /* Grab game status */
+        $status = $this->managements->getServerStatus();
+        $this->output->set_header('Content-Type: application/json; charset=utf-8');
+        echo json_encode($status);
     }
 }
