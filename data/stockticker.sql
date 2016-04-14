@@ -69,7 +69,7 @@ INSERT INTO `players` (`Player`, `password`, `role`, `avatar`, `Cash`) VALUES
 
 DROP TABLE IF EXISTS `stocks`;
 CREATE TABLE IF NOT EXISTS `stocks` (
-  `Code` varchar(4) NOT NULL PRIMARY KEY,
+  `Code` varchar(32) NOT NULL PRIMARY KEY,
   `Name` varchar(255) DEFAULT NULL,
   `Category` varchar(1) DEFAULT NULL,
   `Value` int(3) DEFAULT NULL
@@ -88,7 +88,7 @@ CREATE TABLE IF NOT EXISTS `transactions` (
   `Seq` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
   `DateTime` varchar(19) DEFAULT NULL,
   `Player` varchar(6) DEFAULT NULL,
-  `Stock` varchar(4) DEFAULT NULL,
+  `Stock` varchar(32) DEFAULT NULL,
   `Trans` varchar(4) DEFAULT NULL,
   `Quantity` int(4) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -111,7 +111,7 @@ INSERT INTO `transactions` (`DateTime`, `Player`, `Stock`, `Trans`, `Quantity`) 
 DROP TABLE IF EXISTS `certificates`;
 CREATE TABLE IF NOT EXISTS `certificates` (
   `token` varchar(8) NOT NULL,
-  `stock` varchar(4) NOT NULL,
+  `stock` varchar(32) NOT NULL,
   `player` varchar(64) NOT NULL,
   `amount` int(11) NOT NULL,
   `datetime` varchar(19) NOT NULL
