@@ -37,5 +37,35 @@ if ( !defined( 'APPPATH' ) )
     {header}
     {content}
     {footer}
+
+    <!-- Status Modal -->
+    <div id="status-modal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title text-center"><em>Current Server Status</em></h4>
+                </div>
+                <div class="modal-body">
+                    <dl class="dl-horizontal">
+                        <dt>Round:</dt>
+                        <dd><kbd>{status-round}</kbd></dd>
+                        <dt>State:</dt>
+                        <dd><kbd>{status-desc}</kbd></dd>
+                        <dt>Upcoming:</dt>
+                        <dd><kbd>{status-upcoming}</kbd></dd>
+                        <dt>Countdown:</dt>
+                        <dd><kbd>{status-countdown}</kbd></dd>
+                    </dl>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
 </body>
 </html>
