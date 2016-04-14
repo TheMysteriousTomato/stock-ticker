@@ -9,7 +9,6 @@ $( document ).ready(function() {
                 $("#status-countdown").html(data["countdown"]);
                 console.log(data);
             }).fail(function(err) {
-                alert("Something went wrong, check the log");
                 console.error(err);
             }
         );
