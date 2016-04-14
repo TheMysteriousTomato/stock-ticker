@@ -19,3 +19,28 @@
         {/players}
     </tbody>
 </table>
+
+<h2 class="text-center underline">5 Latest Transactions</h2>
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th>DateTime</th>
+        <th>Player</th>
+        <th>Stock</th>
+        <th>Trans</th>
+        <th>Quantity</th>
+    </tr>
+    </thead>
+    <tbody>
+    {latesttransactions}
+    <tr>
+        <td><a href={href}>{DateTime}</a></td>
+        <td>{Player}</td>
+        <td>{Stock}</td>
+        <td>{Trans}</td>
+        <td>{Quantity}</td>
+    </tr>
+    {/latesttransactions}
+    </tbody>
+</table>
+
