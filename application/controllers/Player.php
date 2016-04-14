@@ -9,6 +9,9 @@ class Player extends Application {
      */
     public function index()
     {
+        if(empty($this->stocks->all()))
+            redirect(base_url());
+
         /* Grabbing username if logged in */
         if(empty($this->session->userdata('username')))
         {

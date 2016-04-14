@@ -31,6 +31,9 @@ class Transactions extends MY_Model2
         $query = $this->db->get();
 
         $result = $query->result_array();
+
+        if(empty($result))
+            return null;
         return $result[0]["Player"];
     }
 

@@ -18,7 +18,7 @@ class Stocks extends MY_Model
 
         $state = $status["state"];
 
-        if($status !== false) {
+        if($status !== false || SERVER) {
             if(strcmp($state, "2") == 0 || strcmp($state, "3") == 0)
             {
                 $this->clearTable();

@@ -328,30 +328,33 @@ class MY_Model extends CI_Model implements Active_Record
 
     function getStatus()
     {
-        // Game Status
-        $gamestatus_url = 'http://bsx.jlparry.com/status';
-        $curl = curl_init();
-        curl_setopt($curl, CURLOPT_HEADER, 1);
-        curl_setopt($curl, CURLOPT_TIMEOUT, 5);
-        curl_setopt($curl, CURLOPT_CONNECTTIMEOUT, 5);
-        curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($curl, CURLOPT_URL, $gamestatus_url);
+        if(SERVER) {
+            // Game Status
+            $gamestatus_url = 'http://bsx.jlparry.com/status';
+            $curl = curl_init();
+            curl_setopt($curl, CURLOPT_HEADER, 1);
+            curl_setopt($curl, CURLOPT_TIMEOUT, 5);
+            curl_setopt($curl, CURLOPT_CONNECTTIMEOUT, 5);
+            curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+            curl_setopt($curl, CURLOPT_URL, $gamestatus_url);
 
-        $response = curl_exec($curl);
-        $content_type = curl_getinfo($curl, CURLINFO_CONTENT_TYPE);
+            $response = curl_exec($curl);
+            $content_type = curl_getinfo($curl, CURLINFO_CONTENT_TYPE);
 
-        curl_close($curl);
+            curl_close($curl);
 
-        if(strcmp($content_type, "text/xml; charset=UTF-8") == 0) {
-            $headers = "";
-            $content = "";
-            list($headers, $content) = explode("\r\n\r\n", $response);
+            if(strcmp($content_type, "text/xml; charset=UTF-8") == 0) {
+                $headers = "";
+                $content = "";
+                list($headers, $content) = explode("\r\n\r\n", $response);
 
-            $gamestatus_xml = simplexml_load_string($content);
+                $gamestatus_xml = simplexml_load_string($content);
 
-            return get_object_vars($gamestatus_xml);
+                return get_object_vars($gamestatus_xml);
+            }
+        } else {
+            return TRUE;
         }
-
         return null;
     }
 
