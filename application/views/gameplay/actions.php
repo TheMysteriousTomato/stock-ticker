@@ -61,16 +61,33 @@
             pass: $("#password").val()
         };
 
-        console.log(data);
-
         $.ajax({
-            url: 'http://bsx.jlparry.com/register',
+            url: 'gameplay/register',
             type: 'POST',
             data: data,
-            success: function(result, status, xhr) {
-                console.log(result);
-                console.log(status);
-                console.log(xhr);
+            success: function(result)
+            {
+                var xml = $(result);
+                var token;
+
+                if(xml.has("token")) {
+                    token = xml.find("token");
+                    if(token.length > 0)
+                    {
+                        console.log(token.text());
+                        Cookies.set('token', token.text());
+                        // TODO: Set expiration
+                    }
+                }
+
+                if(xml.has("error")) {
+                    var error = xml.find("error");
+                    if(error.length > 0)
+                    {
+                        console.log(error.text());
+                        Cookies.set('error', error.text());
+                    }
+                }
             }
         });
     }

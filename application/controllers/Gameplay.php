@@ -34,11 +34,46 @@ class Gameplay extends Application {
         $this->render();
     }
 
+    public function register()
+    {
+
+        $url = 'http://bsx.jlparry.com/register/';
+
+        $post_data = array(
+            'team' => urlencode($this->input->post('team')),
+            'name' => urlencode($this->input->post('name')),
+            'password' => urlencode($this->input->post('password'))
+        );
+
+        // url-ify the data for the POST
+        $post_string = "";
+        foreach($post_data as $key=>$value) { $post_string .= $key.'='.$value.'&'; }
+        rtrim($post_string, '&');
+
+        // open connection
+        $curl = curl_init();
+
+        // set the url, number of POST vars, POST data
+        curl_setopt($curl,CURLOPT_URL, $url);
+        curl_setopt($curl,CURLOPT_POST, count($post_data));
+        curl_setopt($curl,CURLOPT_POSTFIELDS, $post_string);
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+
+        // execute post
+        $result = curl_exec($curl);
+
+        // close connection
+        curl_close($curl);
+
+        $this->output->set_content_type('text/xml');
+        $this->output->set_output($result);
+    }
+
     public function buystock()
     {
         // POST: /buy
         /* DATA:
-            team: your team code
+            team: your team code - s12
             token: your agent authentication token
             player: the name of your player
             stock: the code of the stock your player wishes to purchase

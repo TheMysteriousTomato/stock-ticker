@@ -21,6 +21,9 @@ if ( !defined( 'APPPATH' ) )
     <!-- jQuery -->
     <script src="/assets/js/jQuery.min.js"></script>
 
+    <!-- Cookies -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/js-cookie/2.1.0/js.cookie.min.js"></script>
+
     <!-- Highcharts -->
     <script src="/assets/js/highcharts.js"></script>
 
