@@ -43,10 +43,24 @@ class Application extends CI_Controller {
      */
     function render() {
 
-        $this->data["status-round"]     = "rd-s";
-        $this->data["status-desc"]      = "dc-s";
-        $this->data["status-upcoming"]  = "up-s";
-        $this->data["status-countdown"] = "cd-s";
+        if(SERVER)
+        {
+            $status = $this->managements->getServerStatus();
+
+            if(!(empty($status)))
+            {
+                $this->data["status-round"]     = $status["round"];
+                $this->data["status-desc"]      = $status["desc"];
+                $this->data["status-upcoming"]  = $status["upcoming"];
+                $this->data["status-countdown"] = $status["countdown"];
+            }
+        }
+        else {
+            $this->data["status-round"]     = "rd-s";
+            $this->data["status-desc"]      = "dc-s";
+            $this->data["status-upcoming"]  = "up-s";
+            $this->data["status-countdown"] = "cd-s";
+        }
 
         if(empty($this->session->userdata('username'))) {
             $this->data['login_control'] = $this->parser->parse('templates/_login_control', $this->data, true);

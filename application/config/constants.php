@@ -3,7 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 define('ROLE_PLAYER', 'player');
 define('ROLE_ADMIN',  'admin');
-define('SERVER', FALSE);
+define('SERVER', TRUE);
 /*
 |--------------------------------------------------------------------------
 | Display Debug backtrace
