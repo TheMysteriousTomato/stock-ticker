@@ -98,3 +98,18 @@ th {
         margin-left:300px;
     }
 }
+
+.btn-danger {
+    margin-right: 5px;
+}
+
+.navbar-avatar {
+    height: 49px;
+    padding: 1px;
+    border: solid 1px lightgrey;
+    border-radius: 25px;
+}
+
+.navbar-avatar-container {
+    margin: 0;
+}

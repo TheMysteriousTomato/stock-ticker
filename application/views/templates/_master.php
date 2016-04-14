@@ -35,6 +35,9 @@ if ( !defined( 'APPPATH' ) )
 
     <!-- Bootstrap Switch -->
     <script src="/assets/js/bootstrap-switch.min.js"></script>
+
+    <!-- Check Server -->
+    <script src="/assets/js/check-server.js"></script>
 </head>
 <body>
     {header}
@@ -54,13 +57,13 @@ if ( !defined( 'APPPATH' ) )
                 <div class="modal-body">
                     <dl class="dl-horizontal">
                         <dt>Round:</dt>
-                        <dd><kbd>{status-round}</kbd></dd>
+                        <dd><kbd id="status-round">{status-round}</kbd></dd>
                         <dt>State:</dt>
-                        <dd><kbd>{status-desc}</kbd></dd>
+                        <dd><kbd id="status-desc">{status-desc}</kbd></dd>
                         <dt>Upcoming:</dt>
-                        <dd><kbd>{status-upcoming}</kbd></dd>
+                        <dd><kbd id="status-upcoming">{status-upcoming}</kbd></dd>
                         <dt>Countdown:</dt>
-                        <dd><kbd>{status-countdown}</kbd></dd>
+                        <dd><kbd id="status-countdown">{status-countdown}</kbd></dd>
                     </dl>
                 </div>
                 <div class="modal-footer">
