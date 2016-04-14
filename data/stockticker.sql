@@ -93,6 +93,21 @@ CREATE TABLE IF NOT EXISTS `transactions` (
   `Quantity` int(4) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+INSERT INTO `transactions` (`DateTime`, `Player`, `Stock`, `Trans`, `Quantity`) VALUES
+('2016.02.01-09:01:00', 'Donald', 'BOND', 'buy', 100),
+('2016.02.01-09:01:05', 'Donald', 'TECH', 'sell', 1000),
+('2016.02.01-09:01:10', 'Henry', 'TECH', 'sell', 1000),
+('2016.02.01-09:01:15', 'Donald', 'IND', 'sell', 1000),
+('2016.02.01-09:01:20', 'George', 'GOLD', 'sell', 100),
+('2016.02.01-09:01:25', 'George', 'OIL', 'buy', 500),
+('2016.02.01-09:01:30', 'Henry', 'GOLD', 'sell', 100),
+('2016.02.01-09:01:35', 'Henry', 'GOLD', 'buy', 1000),
+('2016.02.01-09:01:40', 'Donald', 'TECH', 'buy', 100),
+('2016.02.01-09:01:45', 'Donald', 'OIL', 'sell', 100),
+('2016.02.01-09:01:50', 'Donald', 'TECH', 'sell', 100),
+('2016.02.01-09:01:55', 'George', 'OIL', 'buy', 100),
+('2016.02.01-09:01:60', 'George', 'IND', 'buy', 100);
+
 DROP TABLE IF EXISTS `certificates`;
 CREATE TABLE IF NOT EXISTS `certificates` (
   `token` varchar(8) NOT NULL,
@@ -102,4 +117,13 @@ CREATE TABLE IF NOT EXISTS `certificates` (
   `datetime` varchar(19) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+INSERT INTO `certificates` (`token`, `stock`, `player`, `amount`, `datetime`) VALUES
+('0', 'GOLD', 'Donald', 10, '2016.02.29-09:01:00'),
+('17b5c', 'GOLD', 'Donald', 10, '2016.02.29-09:01:00'),
+('1cff5', 'GOLD', 'Donald', 10, '2016.02.29-09:01:00'),
+('37f5c', 'GOLD', 'Donald', 10, '2016.02.29-09:01:00'),
+('83651', 'GOLD', 'Donald', 10, '2016.02.29-09:01:00'),
+('96cab', 'GOLD', 'Donald', 10, '2016.02.29-09:01:00'),
+('ABCD1234', 'GOLD', 'Mickey', 100, '2016.02.29-09:01:00'),
+('d16d4', 'GOLD', 'Donald', 1000, '2016.02.29-09:01:00');
 
