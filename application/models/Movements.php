@@ -28,11 +28,13 @@ class Movements extends MY_Model2
      */
     function latestMovement()
     {
-        $movements = $this->getCSV();
-        $this->clearTable();
+        if(SERVER) {
+            $movements = $this->getCSV();
+            $this->clearTable();
 
-        foreach ($movements as $movement) {
-            $this->add($movement);
+            foreach ($movements as $movement) {
+                $this->add($movement);
+            }
         }
 
         $this->db->select('Code');
@@ -47,7 +49,6 @@ class Movements extends MY_Model2
 
     function latest5Movements()
     {
-
         $this->db->from('movements');
         $this->db->order_by('Datetime', 'desc');
         $this->db->limit(5, 0);
