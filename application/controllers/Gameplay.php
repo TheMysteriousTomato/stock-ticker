@@ -124,8 +124,6 @@ class Gameplay extends Application
             $xml = simplexml_load_string($result);
 
             // store response
-            print_r($xml);
-
             $token = (string)$xml->token;
             $stockcode = (string)$xml->stock;
             $playername = (string)$xml->player;
@@ -176,6 +174,11 @@ class Gameplay extends Application
                         $this->transactions->add($transaction);
 
                         //TODO: On Success show something
+                        $view_data = array(
+                            "amount" => $amount,
+                            "stock" => $stockcode
+                        );
+                        $this->parser->parse('gameplay/buysuccess', $view_data);
                     }
                 }
             }
