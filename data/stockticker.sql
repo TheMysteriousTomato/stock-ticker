@@ -110,7 +110,7 @@ INSERT INTO `transactions` (`DateTime`, `Player`, `Stock`, `Trans`, `Quantity`) 
 
 DROP TABLE IF EXISTS `certificates`;
 CREATE TABLE IF NOT EXISTS `certificates` (
-  `token` varchar(8) NOT NULL,
+  `token` varchar(8) NOT NULL PRIMARY KEY,
   `stock` varchar(32) NOT NULL,
   `player` varchar(64) NOT NULL,
   `amount` int(11) NOT NULL,
@@ -118,7 +118,6 @@ CREATE TABLE IF NOT EXISTS `certificates` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 INSERT INTO `certificates` (`token`, `stock`, `player`, `amount`, `datetime`) VALUES
-('0', 'GOLD', 'Donald', 10, '2016.02.29-09:01:00'),
 ('17b5c', 'GOLD', 'Donald', 10, '2016.02.29-09:01:00'),
 ('1cff5', 'GOLD', 'Donald', 10, '2016.02.29-09:01:00'),
 ('37f5c', 'GOLD', 'Donald', 10, '2016.02.29-09:01:00'),
