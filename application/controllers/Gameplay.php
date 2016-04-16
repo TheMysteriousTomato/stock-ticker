@@ -132,6 +132,10 @@ class Gameplay extends Application
             $amount = (string)$xml->amount;
             $datetime = (string)$xml->datetime;
 
+            if(!empty($datetime)) {
+                $dt = new DateTime("@$datetime");
+            }
+
             // Update player cash balance
             $player = $this->players->some("Player", $playername);
 
@@ -157,13 +161,13 @@ class Gameplay extends Application
                         $certificate->stock = $stockcode;
                         $certificate->player = $playername;
                         $certificate->amount = $amount;
-                        $certificate->datetime = $datetime->format('Y.m.d-H:i:s');
+                        $certificate->datetime = $dt->format('Y.m.d-H:i:s');
 
                         $this->certificates->add($certificate);
 
                         // new transaction
                         $transaction = $this->transactions->create();
-                        $transaction->DateTime = $datetime->format('Y.m.d-H:i:s');
+                        $transaction->DateTime = $dt->format('Y.m.d-H:i:s');
                         $transaction->Player = $playername;
                         $transaction->Stock = $stockcode;
                         $transaction->Trans = "buy";
