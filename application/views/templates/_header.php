@@ -1,4 +1,6 @@
 <header>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+
     <nav class="navbar navbar-default">
         <div class="container-fluid">
             <!-- Brand and toggle get grouped for better mobile display -->
@@ -17,7 +19,13 @@
                
                
                 <ul class="nav navbar-nav">
-                    <li data-toggle="modal" data-target="#status-modal"><a href="javascript:void(0)">Status</a></li>
+                    <li data-toggle="modal" data-target="#status-modal" class="status-link"><a href="javascript:void(0)">
+                            <i class="fa fa-arrow-right" aria-hidden="true" style="color: forestgreen"></i>
+                            Status
+                            <i class="fa fa-arrow-left" aria-hidden="true" style="color: forestgreen"></i>
+                        </a>
+
+                    </li>
                     {menubar}
                 </ul>
 

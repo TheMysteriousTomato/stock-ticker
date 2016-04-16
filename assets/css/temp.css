@@ -32,13 +32,24 @@ select {
     font-family: Serif, serif;
     font-size: 1.5em;
     vertical-align: middle;
-    background: darkgray;
+    background: deeppink;
     color: white !important;
 }
 
 .navbar-brand:hover {
-    background: gray !important;
+    background: hotpink !important;
 }
+
+.table-striped{
+    border: dashed;
+    border-color: deeppink;
+}
+
+.home-titles{
+    color: #080808;
+}
+
+
 
 /* Top of tables have a grey bar */
 th {
@@ -112,4 +123,18 @@ th {
 
 .navbar-avatar-container {
     margin: 0;
+}
+
+@media screen and (max-width: 768px) {
+    .navbar-text {
+        margin-left: 1px;
+        margin-right: 10px;
+
+    }
+}
+
+.status-link{
+    /*text-shadow: 2px 0 4px #600, -2px 0 4px #006;*/
+
+
 }

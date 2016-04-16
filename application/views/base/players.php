@@ -1,4 +1,4 @@
-<h2 class="text-center underline">Players</h2>
+<h2 class="text-center underline home-titles">Players</h2>
 <table class="table table-striped">
     <thead>
         <tr>
@@ -20,7 +20,7 @@
     </tbody>
 </table>
 
-<h2 class="text-center underline">5 Latest Transactions</h2>
+<h2 class="text-center underline home-titles">5 Latest Transactions</h2>
 <table class="table table-striped">
     <thead>
     <tr>
