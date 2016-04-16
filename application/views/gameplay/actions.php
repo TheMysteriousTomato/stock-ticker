@@ -81,6 +81,18 @@
             else
                 $("form#transactions").attr("action", "/gameplay/sellstock");
         });
+
+        setInterval(function(){
+            $.get("/gameplay/updatemarket", function(){}).done(
+                function(data) {
+                    $.each(data, function(k, v){
+                        $("[value=" + data[k]['Code'] + "]").html(data[k]['Name'] + "&nbsp;&nbsp;&nbsp;$" + data[k]['Value']);
+                    });
+                }).fail(function(err) {
+                    //console.error(err);
+                }
+            );
+        }, 2000);
     });
 
     function register()
