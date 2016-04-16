@@ -31,6 +31,11 @@ class Gameplay extends Application {
         $this->data['title'] = "Gameplay";
         $this->data['left-panel-content'] = 'gameplay/status.php';
         $this->data['right-panel-content'] = 'gameplay/actions.php';
+        if($this->input->cookie('token')==null){
+          $this->data['view'] = $this->parser->parse('gameplay/register-agent.php', $this->data, true);
+        } else {
+          $this->data['view'] = $this->parser->parse('gameplay/stocks-actions.php', $this->data, true);
+        }
         $this->render();
     }
 
