@@ -180,29 +180,16 @@ class MY_Model extends CI_Model implements Active_Record
     }
 
     // Add a record to the DB
-    function add($record)
-    {
+    function add($record) {
         // convert object to associative array, if needed
         if (is_object($record)) {
             $data = get_object_vars($record);
         } else {
             $data = $record;
         }
-        //2016.02.01-09:01:56
-        $ts = $data["datetime"];
-        $date = new DateTime("@$ts");
-        $data['datetime'] = $date->format('Y.m.d-H:i:s');
-
-        $this->db->where('seq',$data["seq"]);
-        $q = $this->db->get('movements');
-
-        if ( $q->num_rows() == 0 )  {
-          // update the DB table appropriately
-          $key = $data[$this->_keyField];
-          $this->db->set($data);
-          $this->db->insert_id();
-          $object = $this->db->insert($this->_tableName, $data);
-        }
+        // update the DB table appropriately
+        $key = $data[$this->_keyField];
+        $object = $this->db->insert($this->_tableName, $data);
     }
 
     function addCSV($record)
