@@ -20,10 +20,11 @@
             setTimeout(function(){
                 history.go(-1);
             }, 5000);
-            setInterval(function(){
+            var x = setInterval(function(){
                 var b = $("b");
                 var n = b.html();
                 b.html(--n);
+                if (n == 0) clearInterval(x);
             }, 1000);
         });
     </script>
