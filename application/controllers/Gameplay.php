@@ -184,6 +184,7 @@ class Gameplay extends Application
             }
         }
         //TODO: On Fail show something
+        print_r($xml);
     }
 
     public function sellstock()
@@ -208,21 +209,38 @@ class Gameplay extends Application
         $this->load->helper('cookie');
 
         if (SERVER) {
-            $gameState = $this->managements->getServerStatus();
+            $url = 'http://bsx.jlparry.com/sell';
+            $playername = $this->session->userdata('username');
+            $certificates = $this->certificates->some('Player', $playername);
 
-            if (strcmp($gameState["state"], "3")) {
-                $url = 'http://bsx.jlparry.com/sell';
+            if (!empty($certificates)) {
+                $thecerts = array();
+                foreach($certificates as $cert)
+                {
+                    if(strcmp($cert->stock, $this->input->post('stock')) == 0)
+                        array_push($thecerts, $cert->token);
+                }
+
+                $thecert = implode(',', $thecerts);
+//                $thecert .= ",";
+                $x = explode(",", $thecert);
+
+                var_dump($x);
 
                 $post_data = array(
                     'team' => urlencode($this->input->cookie('team')),
                     'token' => urlencode($this->input->cookie('token')),
                     'player' => urlencode($this->session->userdata('username')),
                     'stock' => urlencode($this->input->post('stock')),
-                    'quantity' => urlencode($this->input->post('quantity'))
+                    'quantity' => urlencode($this->input->post('quantity')),
+                    'certificate' => $thecert
                 );
 
                 $post_length = count($post_data);
                 $post_string = $this->urlify($post_data);
+
+                echo " post string: ";
+                var_dump($post_string);
 
                 // open connection
                 $curl = curl_init();
@@ -239,8 +257,8 @@ class Gameplay extends Application
                 // close connection
                 curl_close($curl);
 
-                $this->output->set_content_type('text/xml');
-                $this->output->set_output($result);
+                $xml = simplexml_load_string($result);
+                print_r($xml);
             }
         }
     }
