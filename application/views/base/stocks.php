@@ -8,7 +8,7 @@
             <th>Value</th>
         </tr>
     </thead>
-    <tbody>
+    <tbody id="stocks-tbody">
         {stocks}
         <tr>
             <td><a href={href}>{Code}</a></td>
@@ -42,3 +42,24 @@
 
     </tbody>
 </table>
+
+<script>
+    setInterval(function(){
+        $.get("/gameplay/updatemarket", function(){}).done(
+            function(data) {
+                var body = $("#stocks-tbody");
+                body.html("");
+                $.each(data, function(k, v){
+                    body.append("<tr>" +
+                                    "<td><a href='/stock/display/'" + data[k]['Code'] + "> " + data[k]['Code'] + "</a></td>" +
+                                    "<td>" + data[k]['Name']     + "</td>" +
+                                    "<td>" + data[k]['Category'] + "</td>" +
+                                    "<td>" + data[k]['Value']    + "</td>" +
+                                "</tr>");
+                });
+            }).fail(function(err) {
+                //console.error(err);
+            }
+        );
+    }, 3500);
+</script>
