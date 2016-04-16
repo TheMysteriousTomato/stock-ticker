@@ -15,14 +15,17 @@ if ( !defined( 'APPPATH' ) )
     <!-- Custom Stylesheet -->
     <link rel="stylesheet" href="/assets/css/temp.css">
 
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="/assets/css/font-awesome.min.css">
+
     <!-- Switch Stylesheet -->
     <link rel="stylesheet" href="/assets/css/bootstrap-switch.min.css">
 
     <!-- jQuery -->
     <script src="/assets/js/jQuery.min.js"></script>
 
-    <!-- Cookies -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/js-cookie/2.1.0/js.cookie.min.js"></script>
+    <!-- jQuery Cookies -->
+    <script src="/assets/js/js-cookie.min.js"></script>
 
     <!-- Highcharts -->
     <script src="/assets/js/highcharts.js"></script>
