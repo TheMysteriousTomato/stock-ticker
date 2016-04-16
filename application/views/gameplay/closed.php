@@ -16,7 +16,7 @@
             You will be redirected back when the game is setup.
         </h3>
         <br><br>
-        <h4>or you can visit the homepage <a href="window.location.assign(window.location.origin)" class="btn btn-default">here</a></h4>
+        <h4>or you can visit the homepage <a href="javascript:window.location.assign(window.location.origin)" class="btn btn-default">here</a></h4>
     </div>
     <script src="/assets/js/jQuery.min.js"></script>
     <script>
