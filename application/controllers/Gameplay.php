@@ -157,13 +157,13 @@ class Gameplay extends Application
                         $certificate->stock = $stockcode;
                         $certificate->player = $playername;
                         $certificate->amount = $amount;
-                        $certificate->datetime = $datetime->format('Y.m.d-H:i:s');
+                        $certificate->datetime = $datetime;//->format('Y.m.d-H:i:s');
 
                         $this->certificates->add($certificate);
 
                         // new transaction
                         $transaction = $this->transactions->create();
-                        $transaction->DateTime = $datetime->format('Y.m.d-H:i:s');
+                        $transaction->DateTime = $datetime;//->format('Y.m.d-H:i:s');
                         $transaction->Player = $playername;
                         $transaction->Stock = $stockcode;
                         $transaction->Trans = "buy";
@@ -172,6 +172,11 @@ class Gameplay extends Application
                         $this->transactions->add($transaction);
 
                         //TODO: On Success show something
+                        $view_data = array(
+                            "amount" => $amount,
+                            "stock" => $stockcode
+                        );
+                        $this->parser->parse('gameplay/buysuccess', $view_data);
                     }
                 }
             }

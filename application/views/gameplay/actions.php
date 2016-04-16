@@ -23,7 +23,7 @@
             <label for="stock">Stocks:</label>
             <select id="stock" name="stock" class="form-control">
                 {Stocks}
-                    <option value="{Code}">{Name}</option>
+                    <option value="{Code}">{Name}&nbsp;&nbsp;&nbsp;${Value}</option>
                 {/Stocks}
             </select>
         </div>
