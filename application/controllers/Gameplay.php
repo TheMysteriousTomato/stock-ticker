@@ -92,8 +92,6 @@ class Gameplay extends Application
             quantity: the number of that stock that the player wishes to purchase
         */
 
-        //TODO: update transactions
-
         $this->load->helper('cookie');
 
         if (SERVER) {
@@ -128,8 +126,6 @@ class Gameplay extends Application
             $xml = simplexml_load_string($result);
 
             // store response
-            print_r($xml);
-
             $token = (string)$xml->token;
             $stockcode = (string)$xml->stock;
             $playername = (string)$xml->player;
