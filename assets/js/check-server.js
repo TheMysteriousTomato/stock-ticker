@@ -7,9 +7,9 @@ $( document ).ready(function() {
                 $("#status-state").html(data["desc"]);
                 $("#status-upcoming").html(data["upcoming"]);
                 $("#status-countdown").html(data["countdown"]);
-                console.log(data);
+                //console.log(data);
             }).fail(function(err) {
-                console.error(err);
+                //console.error(err);
             }
         );
     }
