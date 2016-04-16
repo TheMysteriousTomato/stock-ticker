@@ -276,4 +276,12 @@ class Gameplay extends Application
 
         return $post_string;
     }
+
+    public function updatemarket()
+    {
+        $stocks = $this->stocks->getAllStocks();
+        $this->output->set_header('Content-Type: application/json; charset=utf-8');
+//        $this->output->set_output($stocks);
+        echo json_encode($stocks);
+    }
 }
