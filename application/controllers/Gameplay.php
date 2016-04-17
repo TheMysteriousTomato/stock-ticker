@@ -171,7 +171,7 @@ class Gameplay extends Application
 
                         $this->transactions->add($transaction);
 
-                        //TODO: On Success show something
+                        // On Success
                         $view_data = array(
                             "amount" => $amount,
                             "stock" => $stockcode
@@ -180,9 +180,20 @@ class Gameplay extends Application
                     }
                 }
             }
+
+            // On Fail
+            if(!$xml) {
+                $view_data = array(
+                    "error" => (string) $xml->error
+                );
+            }
+            else {
+                $view_data = array(
+                    "error" => "BSX server down!"
+                );
+            }
+            $this->parser->parse('gameplay/buyfail', $view_data);
         }
-        //TODO: On Fail show something
-        print_r($xml);
     }
 
     public function sellstock()
@@ -220,7 +231,6 @@ class Gameplay extends Application
                 }
 
                 $thecert = implode(',', $thecerts);
-//                $thecert .= ",";
                 $x = explode(",", $thecert);
 
                 var_dump($x);
@@ -277,7 +287,6 @@ class Gameplay extends Application
     {
         $stocks = $this->stocks->getAllStocks();
         $this->output->set_header('Content-Type: application/json; charset=utf-8');
-//        $this->output->set_output($stocks);
         echo json_encode($stocks);
     }
 }
