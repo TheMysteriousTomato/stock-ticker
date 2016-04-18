@@ -1,15 +1,19 @@
+/* Bring page up to navbar */
 .navbar {
     margin-bottom: 0;
 }
 
+/* Push page content down after drop down */
 select {
     margin-bottom: 5%;
 }
 
+/* Underlines text */
 .underline {
     text-decoration: underline;
 }
 
+/* Strech panels in desktop */
 @media screen and (min-width: 768px){
     .players-panel, .stocks-panel {
         height: 100vh;
@@ -18,23 +22,119 @@ select {
     }
 }
 
+/* Remove logo on graphs */
 .highcharts-container svg text[zIndex="8"] {
     display: none
 }
 
+/* Bigger & Centered logo in navbar */
 .navbar-brand {
     font-family: Serif, serif;
     font-size: 1.5em;
+    vertical-align: middle;
+    background: deeppink;
+    color: white !important;
 }
 
+.navbar-brand:hover {
+    background: hotpink !important;
+}
+
+.table-striped{
+    border: dashed;
+    border-color: deeppink;
+}
+
+.home-titles{
+    color: #080808;
+}
+
+
+
+/* Top of tables have a grey bar */
 th {
-    background: lightgrey;
+    background: #eeeeee;
 }
 
+/* Rows with stocks that are bought */
 .row-buy {
     background: lightgreen
 }
 
+/* Rows with stocks that are sold */
 .row-sell {
     background: lightcoral;
+}
+
+/* Reduce image size of logo image in navbar */
+.logo {
+    max-height:45px;
+}
+
+.btn-file {
+    position: relative;
+    overflow: hidden;
+}
+.btn-file input[type=file] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 100%;
+    min-height: 100%;
+    font-size: 100px;
+    text-align: right;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    outline: none;
+    background: white;
+    cursor: inherit;
+    display: block;
+}
+
+.modal-header {
+    background: #5fd6ff;
+}
+
+.modal {
+    font-size: 1.3em;
+}
+
+@media (min-width: 768px) {
+    .dl-horizontal dt {
+        width:280px;
+        white-space: normal;
+        margin-bottom: 5px;
+    }
+    .dl-horizontal dd {
+        margin-left:300px;
+    }
+}
+
+.btn-danger {
+    margin-right: 5px;
+}
+
+.navbar-avatar {
+    height: 49px;
+    padding: 1px;
+    border: solid 1px lightgrey;
+    border-radius: 25px;
+}
+
+.navbar-avatar-container {
+    margin: 0;
+}
+
+@media screen and (max-width: 768px) {
+    .navbar-text {
+        margin-left: 1px;
+        margin-right: 10px;
+
+    }
+}
+
+.status-link{
+    /*text-shadow: 2px 0 4px #600, -2px 0 4px #006;*/
+
+
 }

@@ -2,6 +2,9 @@
 {form}
 {select}
 
+<h3 class="text-center">Players Holdings</h3>
+<!-- Graph Container -->
 <div id="holdings-chart"></div>
 
-<script src="../assets/js/holding-history.js"></script>
+<!-- Inject Graph -->
+<script src="/assets/js/holding-history.js"></script>

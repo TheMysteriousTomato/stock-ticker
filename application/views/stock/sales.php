@@ -1,4 +1,4 @@
-<h2 class="text-center underline">Stocks</h2>
+<h2 class="text-center underline">Transactions</h2>
 <table class="table">
     <thead>
     <tr>

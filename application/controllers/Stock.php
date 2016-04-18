@@ -9,6 +9,9 @@ class Stock extends Application {
      */
     public function index()
     {
+        if(empty($this->stocks->all()))
+            redirect(base_url());
+        
         $stock     = $this->stocks->getRecentStock();
         $trans     = $this->stocks->getSalesTransactions($stock->Code);
         $stocks    = $this->stocks->getAllStocksForDisplay();
@@ -17,6 +20,7 @@ class Stock extends Application {
                            'Category' => $stock->Category,
                            'Value'    => money_format("$%i", $stock->Value));
 
+        /* Set up data to render page */
         $this->data['title']               = "Stocks ~ $stock->Code";
         $this->data['left-panel-content']  = 'stock/index';
         $this->data['right-panel-content'] = 'stock/sales';
@@ -28,10 +32,6 @@ class Stock extends Application {
                                                             $stock->Code,
                                                             "class = 'form-control'" .
                                                             "onchange = 'this.form.submit()'");
-
-        //hokey
-        $this->data['src'] = "../assets/js/stock-history.js";
-
         $this->render();
     }
 
@@ -40,15 +40,14 @@ class Stock extends Application {
      */
     public function display()
     {
+        /* Either get stock from submit/url */
         if(!(empty($this->input->post('stock'))))
         {
             $code = $this->input->post('stock');
-            $this->data['src'] = "../assets/js/stock-history.js";
         }
         else
         {
             $code = $this->uri->segment(3);
-            $this->data['src'] = "../../assets/js/stock-history.js";
         }
 
         $stocks    = $this->stocks->getAllStocksForDisplay();
@@ -58,6 +57,7 @@ class Stock extends Application {
                            'Category' => $stock->Category,
                            'Value'    => money_format("$%i", $stock->Value));
 
+        /* Set up data to render page */
         $this->data['title']               = "Stocks ~ $code";
         $this->data['left-panel-content']  = 'stock/index';
         $this->data['right-panel-content'] = 'stock/sales';

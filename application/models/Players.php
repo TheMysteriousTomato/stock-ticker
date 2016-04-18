@@ -4,7 +4,7 @@ class Players extends MY_Model
 {
     function __construct()
     {
-        parent::__construct('players', 'Player');
+        parent::__construct('players', 'id');
     }
 
     /**
@@ -22,7 +22,7 @@ class Players extends MY_Model
             $player->Equity = $this->players->getEquity($player->Player);
 
             // Add a link to each player's portfolio
-            $player->href = '/players/' . $player->Player;
+            $player->href = '/player/display/' . $player->Player;
         }
 
         return $players;
@@ -108,5 +108,39 @@ class Players extends MY_Model
         array_push($result, $keys);
         array_push($result, $dataPoints);
         return $result;
+    }
+
+    /**
+     * Grabs the latest transaction from the database
+     * @return mixed
+     */
+    public function latestTransaction(){
+        return $this->transactions->latestTransaction();
+    }
+
+    /**
+     * Grabs all transactions from the database
+     * @return mixed
+     */
+    public function getAllTransactions(){
+        return $this->transactions->getAllTransactions();
+    }
+
+    /**
+     * Grabs all transactions for the specified player
+     * @param $latestPlayer
+     * @return mixed
+     */
+    public function getPlayerTransactions($latestPlayer){
+        return $this->transactions->getPlayerTransactions($latestPlayer);
+    }
+
+    /**
+     * Grabs all stocks for the specified player
+     * @param $latestPlayer
+     * @return mixed
+     */
+    public function getCurrentHoldings($latestPlayer){
+        return $this->transactions->getCurrentHoldings($latestPlayer);
     }
 }

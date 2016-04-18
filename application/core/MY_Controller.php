@@ -23,12 +23,19 @@ class Application extends CI_Controller {
         parent::__construct();
         $this->data          = array();
         $this->data['title'] = '?';
+        $this->data['date']  = date('l\, F jS Y');
         $this->errors        = array();
 
-        $players_link = '<button type="button" class="btn btn-info">Players</button>';
-        $stocks_link = '<button type="button" class="btn btn-info">Stocks</button>';
-        $this->data['stocks_link'] = anchor('stock', $stocks_link, 'title="List of All the Stocks"');
-        $this->data['players_link'] = anchor('player', $players_link, 'title="List of All the Players"');
+//        $players_link = '<button type="button" class="btn btn-info">Players</button>';
+//        $stocks_link = '<button type="button" class="btn btn-info">Stocks</button>';
+//        $gameplays_link = '<button type="button" class="btn btn-info">Gameplay</button>';
+//        $managements_link = '<button type="button" class="btn btn-info">Management</button>';
+//
+//        $this->data['stocks_link'] = anchor('stock', $stocks_link, 'title="List of All the Stocks"');
+//        $this->data['players_link'] = anchor('player', $players_link, 'title="List of All the Players"');
+//        $this->data['gameplays_link'] = anchor('gameplay', $gameplays_link, 'title="Gameplay"');
+//        $this->data['managements_link'] = anchor('management', $managements_link, 'title="Management"');
+
     }
 
     /**
@@ -36,16 +43,38 @@ class Application extends CI_Controller {
      */
     function render() {
 
+        if(SERVER)
+        {
+            $status = $this->managements->getServerStatus();
+
+            if(!(empty($status)))
+            {
+                $this->data["status-round"]     = $status["round"];
+                $this->data["status-desc"]      = $status["desc"];
+                $this->data["status-upcoming"]  = $status["upcoming"];
+                $this->data["status-countdown"] = $status["countdown"];
+            }
+        }
+        else {
+            $this->data["status-round"]     = "rd-s";
+            $this->data["status-desc"]      = "dc-s";
+            $this->data["status-upcoming"]  = "up-s";
+            $this->data["status-countdown"] = "cd-s";
+        }
+
         if(empty($this->session->userdata('username'))) {
             $this->data['login_control'] = $this->parser->parse('templates/_login_control', $this->data, true);
         } else {
-            $data = array('username' => $this->session->userdata('username'));
+            $data = array('username' => $this->session->userdata('username'), 'avatar' => $this->session->userdata('avatar'));
             $this->data['login_control'] = $this->parser->parse('templates/_logout_control', $data, true);
 
         }
+//        $this->data['header'] = $this->parser->parse('templates/_header', $this->data, true);
+
+        $mychoices = array('menudata' => $this->makemenu());
+        $this->data['menubar'] = $this->parser->parse('templates/_menubar', $mychoices, true);
         $this->data['header'] = $this->parser->parse('templates/_header', $this->data, true);
-
-
+        
         $this->data['left-panel']  = $this->parser->parse($this->data['left-panel-content'], $this->data, true);
         $this->data['right-panel'] = $this->parser->parse($this->data['right-panel-content'], $this->data, true);
 
@@ -57,4 +86,24 @@ class Application extends CI_Controller {
         $this->parser->parse('templates/_master', $this->data);
     }
 
+    function makemenu(){
+        $choices = array();
+        $userRole = $this->session->userdata('role');
+
+        // menu choices for everyone to see
+        $choices[] = array('name' => "Stock", 'link' => '/stock');
+        $choices[] = array('name' => "Player", 'link' => '/player');
+
+        if(!(empty($this->session->userdata('username'))))
+        {
+            if (strcmp($userRole, ROLE_PLAYER) == 0)
+                $choices[] = array('name' => "Gameplay", 'link' => '/gameplay');
+            if (strcmp($userRole, ROLE_ADMIN) == 0)
+                $choices[] = array('name' => "Management", 'link' => '/management');
+        }
+        return $choices;
+
+    }
+    
+    
 }

@@ -9,14 +9,22 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="/">The Mysterious Tomato ~ Stock Ticker</a>
+                <a class="navbar-brand" href="/">Stock Ticker<i class="divider-vertical"></i></a>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+               
+               
                 <ul class="nav navbar-nav">
-                    <li>{players_link}</li>
-                    <li>{stocks_link}</li>
+                    <li data-toggle="modal" data-target="#status-modal" class="status-link"><a href="javascript:void(0)">
+                            <i class="fa fa-arrow-right" aria-hidden="true" style="color: forestgreen"></i>
+                            Status
+                            <i class="fa fa-arrow-left" aria-hidden="true" style="color: forestgreen"></i>
+                        </a>
+
+                    </li>
+                    {menubar}
                 </ul>
 
                 <div class="nav navbar-nav navbar-right">
